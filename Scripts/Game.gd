@@ -1,39 +1,50 @@
 extends Node2D
 
-var points = 0
-var fallingObjects = 0
-var start = false
-var end = false
+var points = 0 #keep score
+var fallingObjects = 0 #keep track of missed objects
+var start = false  #start game
+var end = false #end game
 export (PackedScene) var Objects
-var cDif = 10
+var cDif = 10 #points stuff
 
+# hide things once user presses start
 func _ready():
 	$Score.hide()
 	$objects.hide()
 
+
 func _physics_process(delta):
+	
+	# set up score keeping 
 	$Score.set_text("points: " + str(points))
 	$objects.set_text("Missed Objects: " + str(fallingObjects))
 	$gameOver.set_text(" ")
+	
+	# determine when game ends
 	if start and !end:
 		if fallingObjects >= 4:
 			end = true
 		if points > cDif:
 			cDif += 10
 			$spawn.set_wait_time($spawn.get_wait_time() - 0.1)
+
+	# beginning directions
 	elif !start and !end:
 		$gameOver.set_text("Avoid the Toilet Paper")
+	# end text
 	else: 
 		$gameOver.set_text("Game Over!")
 
+	# game start
 func _on_start_pressed():
 	start = true
-	$Score.show()
+	$Score.show() 
 	$objects.show()
 	$spawn.start()
 	$menu/start.hide()
 	#$selection.play()
 	
+
 func _on_spawn_timeout():
 	if !end:
 		var o = Objects.instance()

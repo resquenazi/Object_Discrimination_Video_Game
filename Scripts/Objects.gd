@@ -1,9 +1,10 @@
 extends RigidBody2D
 
+#set up variables
 var pos
 var w = 50
 var mousePos = Vector2()
-var frame = randi()%5
+var frame = randi()%5 
 var jump = randi()%50+250
 var dir = randi()%200-50
 
@@ -12,6 +13,7 @@ func _ready():
 	$objects.set_frame(frame)
 	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
 
+# make objects disappear when clicked
 func _physics_process(delta):
 	if Input.is_action_just_pressed("click"):
 		mousePos = get_global_mouse_position()
@@ -23,4 +25,4 @@ func _physics_process(delta):
 			queue_free()
 	if global_position.y > 500:
 		get_parent().fallingObjects +=1
-		queue_free()
+		queue_free() #clear cache
