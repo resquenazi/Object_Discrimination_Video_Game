@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/objects.png-3315a92049bfb438a8bf77e4e6afd664.stex"
+path="res://.import/cheese_grater.png-213180c5262fada50517ce9919b0cfe2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Objects/objects.png"
-dest_files=[ "res://.import/objects.png-3315a92049bfb438a8bf77e4e6afd664.stex" ]
+source_file="res://Sprites/Objects/cheese_grater.png"
+dest_files=[ "res://.import/cheese_grater.png-213180c5262fada50517ce9919b0cfe2.stex" ]
 
 [params]
 

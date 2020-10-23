@@ -32,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="objects" type="Label" parent="."]
+[node name="missedObjects" type="Label" parent="."]
 margin_left = 618.827
 margin_top = 39.7926
 margin_right = 742.827

@@ -19,6 +19,10 @@ config/name="FruitNinja"
 run/main_scene="res://Scenes/Game.tscn"
 run/low_processor_mode_sleep_usec=8000
 
+[autoload]
+
+GetRandomNumber="*res://Scripts/GetRandomNumber.gd"
+
 [display]
 
 window/size/width=800
