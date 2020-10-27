@@ -1,0 +1,18 @@
+extends Node
+
+var numbers = []
+var total = 3
+
+func _ready():
+	randomize()
+	for i in range(0,total):
+		numbers.append(i + 1)
+
+	for i in range(total):
+		var swap_val = numbers[i]
+		var swap_idx = int(rand_range(i, total))
+		
+		numbers[i] = numbers[swap_idx]
+		numbers[swap_idx] = swap_val
+		
+		print(numbers)

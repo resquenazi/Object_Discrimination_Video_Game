@@ -12,7 +12,10 @@ var tex_07 = preload("res://Sprites/Objects/tissue_paper.png")
 var tex_08 = preload("res://Sprites/Objects/toilet_paper.png")
 var tex_09 = preload("res://Sprites/Objects/tooth_paste.png")
 
-var tex_ref_array = [tex_00, tex_01, tex_02, tex_03, tex_04, tex_05, tex_06,tex_07, tex_08, tex_09]
+var tex_ref_array = [tex_00, tex_01, tex_02, tex_03, tex_04, tex_05, tex_06,
+tex_07, tex_08, tex_09]
+
+var randN = GetRandomNumber.sample
 
 var pos
 var w = 50
@@ -22,7 +25,7 @@ var dir = randi()%200-50
 
 # make objects bounce
 func _ready():
-	$Sprite1.texture = tex_ref_array[GetRandomNumber.array_element_number]
+	$Sprite1.texture = tex_ref_array[randN[randi()%randN.size()]]
 	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
 
 # make objects disappear when clicked

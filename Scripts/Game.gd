@@ -11,8 +11,7 @@ var cDif = 10 #points stuff
 func _ready():
 	$Score.hide()
 	$missedObjects.hide()
-
-
+	
 func _physics_process(delta):
 	
 	# set up score keeping 
@@ -46,8 +45,8 @@ func _on_start_pressed():
 func _on_spawn_timeout():
 	if !end:
 		var o = Objects.instance()
-		#o.global_position = Vector2(randi()%700+100 , 400)
+		o.global_position = Vector2(randi()%700+100 , 400)
 		add_child(o)
 	else:
-		#$final.play()
+		$final.play()
 		$spawn.stop()
