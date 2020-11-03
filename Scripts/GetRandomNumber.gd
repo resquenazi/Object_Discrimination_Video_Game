@@ -2,6 +2,7 @@ extends Node
 
 var list = range(0,10)
 var sample =[]
+var object_avoid_idx = []
 
 func _ready():
 	randomize()
@@ -10,5 +11,5 @@ func _ready():
 		sample.append(list[x])
 		list.remove(x)
 	print(sample)
-	print(sample[1])
-
+	object_avoid_idx = sample[randi() % sample.size()]
+	print(object_avoid_idx)

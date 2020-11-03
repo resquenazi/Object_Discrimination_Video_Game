@@ -25,8 +25,8 @@ GetRandomNumber="*res://Scripts/GetRandomNumber.gd"
 
 [display]
 
-window/size/width=800
-window/size/height=400
+window/size/width=1174
+window/size/height=666
 
 [input]
 

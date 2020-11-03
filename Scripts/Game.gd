@@ -6,6 +6,11 @@ var start = false  #start game
 var end = false #end game
 export (PackedScene) var Objects
 var cDif = 10 #points stuff
+var randN = GetRandomNumber.sample
+onready var object_avoid_idx = GetRandomNumber.object_avoid_idx
+var object_labels = ["bowl", "bread", "cheese_grater", "clock", "cup", "pot", "straws",
+ "tissue_paper", "toilet_paper", "tooth_paste"]
+#onready var object_avoid_idx = randN[randi() % randN.size()]
 
 # hide things once user presses start
 func _ready():
@@ -13,7 +18,6 @@ func _ready():
 	$missedObjects.hide()
 	
 func _physics_process(delta):
-	
 	# set up score keeping 
 	$Score.set_text("points: " + str(points))
 	$missedObjects.set_text("Missed Objects: " + str(fallingObjects))
@@ -29,9 +33,9 @@ func _physics_process(delta):
 
 	# beginning directions
 	elif !start and !end:
-		$gameOver.set_text("Avoid the Toilet Paper")
+		$gameOver.set_text("Avoid the " + str(object_labels[object_avoid_idx]))
 	# end text
-	else: 
+	else:
 		$gameOver.set_text("Game Over!")
 
 	# game start
@@ -45,8 +49,8 @@ func _on_start_pressed():
 func _on_spawn_timeout():
 	if !end:
 		var o = Objects.instance()
-		o.global_position = Vector2(randi()%700+100 , 400)
+		o.global_position = Vector2(randi()%900+100, 500)
 		add_child(o)
 	else:
-		$final.play()
+		#$final.play()
 		$spawn.stop()
