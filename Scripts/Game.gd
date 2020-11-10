@@ -5,7 +5,8 @@ export (PackedScene) var TargetObjects
 export (PackedScene) var DistractorObjects
 
 ## initialize game variables
-var points = 0 #keep score
+var targetObjectsPoints = 0 #keep score of how many target objects were sliced
+var distractorObjectsPoints = 0
 var fallingObjects = 0 #keep track of missed objects
 var start = false  #start game
 var end = false #end game
@@ -19,20 +20,22 @@ var object_labels = ["bowl", "bread", "cheese_grater", "clock", "cup", "pot", "s
 
 ## hide things once user presses start
 func _ready():
-	$ScoreLabel.hide()
-	$MissedObjects.hide()
+	$TargetObjectsScoreLabel.hide()
+	$MissedObjectsLabel.hide()
+	$DistractorObjectsScoreLabel.hide()
 
 ## set up score keeping
 func _physics_process(delta): 
-	$ScoreLabel.set_text("points: " + str(points))
-	$MissedObjects.set_text("Missed Objects: " + str(fallingObjects))
+	$TargetObjectsScoreLabel.set_text("Target Objects Hit: " + str(targetObjectsPoints))
+	$MissedObjectsLabel.set_text("Missed Objects: " + str(fallingObjects))
+	$DistractorObjectsScoreLabel.set_text("Distractor Objects Hit " + str(distractorObjectsPoints))
 	$GameOver.set_text(" ")
 	
 	# determine when game ends
 	if start and !end:
 		if fallingObjects >= 4:
 			end = true
-		if points > cDif:
+		if targetObjectsPoints > cDif:
 			cDif += 10
 			$TargetObjectsTimer.set_wait_time($TargetObjectsTimer.get_wait_time() - 0.1)
 
@@ -46,8 +49,9 @@ func _physics_process(delta):
 ## instance scenes
 func _on_Start_pressed():
 	start = true
-	$ScoreLabel.show() 
-	$MissedObjects.show()
+	$TargetObjectsScoreLabel.show() 
+	$DistractorObjectsScoreLabel.show()
+	$MissedObjectsLabel.show()
 	$TargetObjectsTimer.start()
 	$DistractorObjectsTimer.start()
 	$Menu/Start.hide()

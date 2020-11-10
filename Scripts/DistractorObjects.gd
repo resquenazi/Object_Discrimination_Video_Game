@@ -23,7 +23,7 @@ func _physics_process(delta):
 		pos.y -= w/2
 		if mousePos.x >= pos.x and mousePos.x <= pos.x + w and mousePos.y >= pos.y \
 		and mousePos.y <= pos.y + w:
-				get_parent().points -= 1
+				get_parent().distractorObjectsPoints += 1
 				queue_free()
 	if global_position.y > 500:
 		get_parent().fallingObjects +=1
