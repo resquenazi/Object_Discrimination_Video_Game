@@ -15,18 +15,13 @@ _global_script_class_icons={
 
 [application]
 
-config/name="FruitNinja"
+config/name="Fruit Ninja Remake"
 run/main_scene="res://Scenes/Game.tscn"
-run/low_processor_mode_sleep_usec=8000
+config/icon="res://icon.png"
 
 [autoload]
 
-GetRandomNumber="*res://Scripts/GetRandomNumber.gd"
-
-[display]
-
-window/size/width=1174
-window/size/height=666
+Global="*res://Scripts/Global.gd"
 
 [input]
 
