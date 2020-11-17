@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/UserInput.gd" type="Script" id=2]
+
+[node name="PlayerInput" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.9967
+margin_top = -1.49826
+margin_right = 2.9967
+margin_bottom = -1.49829
+color = Color( 0.192157, 0.235294, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -46.0
+margin_right = 139.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 1 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -19.9999
+margin_top = 300.0
+margin_right = 38.0001
+margin_bottom = 327.0
+custom_fonts/font = ExtResource( 1 )
+text = "Name:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGame" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5685
+margin_top = 32.4264
+margin_right = 88.4315
+margin_bottom = 109.426
+custom_fonts/font = ExtResource( 1 )
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/CursorTrail.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.225275, 0.509091 ), 0.0, 0.0, 0, 0, Vector2( 0.961539, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.0529801, 1 )
+colors = PoolColorArray( 0.292969, 0.286102, 0.286102, 1, 1, 1, 1, 1 )
+
+[node name="CursorTrail" type="Line2D"]
+width = 15.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.592157, 0.603922, 0.647059, 1 )
+gradient = SubResource( 2 )
+joint_mode = 1
+end_cap_mode = 2
+round_precision = 80
+script = ExtResource( 1 )

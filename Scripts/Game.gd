@@ -33,7 +33,7 @@ func _physics_process(delta):
 	
 	# determine when game ends
 	if start and !end:
-		if fallingObjects >= 4:
+		if fallingObjects >= 10:
 			end = true
 		if targetObjectsPoints > cDif:
 			cDif += 10
@@ -45,6 +45,8 @@ func _physics_process(delta):
 	# end text
 	else:
 		$GameOver.set_text("Game Over!")
+		_save()
+
 
 ## instance scenes
 func _on_Start_pressed():
@@ -59,17 +61,29 @@ func _on_Start_pressed():
 func _on_TargetObjectsTimer_timeout():
 	if !end:
 		var t = TargetObjects.instance()
-		t.global_position = Vector2(randi()%900+100, 500)
+		t.global_position = Vector2(randi()%900+100, 600) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
 	else:
-		#$final.play()
 		$TargetObjectsTimer.stop()
 
 func _on_DistractorObjectsTimer_timeout():
 	if !end:
 		var d = DistractorObjects.instance()
-		d.global_position = Vector2(randi()%900+100, 500)
+		d.global_position = Vector2(randi()%900+100, 600) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
 	else:
-		#$final.play()
 		$DistractorObjectsTimer.stop()
+
+func _save():
+	# Create an empty string to hold the information
+	var data = ""
+	data += "Target_Objects_Points: " + str(targetObjectsPoints)
+	data += "\n"
+	data += "Distractor_Objects_Points " + str(distractorObjectsPoints)
+	data += "\n"
+	data += "Missed_Objects: " + str(fallingObjects)
+	var new_file = File.new()
+	new_file.open("res://savegame.txt", File.WRITE)
+	# Store the data and close the file
+	new_file.store_line(data)
+	new_file.close()
