@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Fonts/font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/UserInput.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=4]
 
-[node name="PlayerInput" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 45
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 4 )
+
+[node name="UserInput" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -32,7 +40,7 @@ margin_left = -110.0
 margin_top = -46.0
 margin_right = 139.0
 margin_bottom = 12.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,28 +49,14 @@ __meta__ = {
 [node name="Name" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -19.9999
-margin_top = 300.0
-margin_right = 38.0001
-margin_bottom = 327.0
-custom_fonts/font = ExtResource( 1 )
-text = "Name:"
+margin_left = -154.848
+margin_top = 246.061
+margin_right = 185.152
+margin_bottom = 325.061
+custom_fonts/font = SubResource( 2 )
+text = "Enter your name:"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="StartGame" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -62.5685
-margin_top = 32.4264
-margin_right = 88.4315
-margin_bottom = 109.426
-custom_fonts/font = ExtResource( 1 )
-text = "Start Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
