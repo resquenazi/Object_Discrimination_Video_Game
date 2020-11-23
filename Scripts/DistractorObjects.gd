@@ -26,5 +26,4 @@ func _physics_process(delta):
 				get_parent().distractorObjectsPoints += 1
 				queue_free()
 	if global_position.y > 600:
-		get_parent().fallingObjects +=1
 		queue_free() #clear cache
