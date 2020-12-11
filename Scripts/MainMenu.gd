@@ -6,8 +6,7 @@ func _ready():
 
 func PlayGame():
 	get_tree().change_scene("res://Scenes/UserInput.tscn")
-	
-	
+
 func Quit():
 	get_tree().quit()
 	

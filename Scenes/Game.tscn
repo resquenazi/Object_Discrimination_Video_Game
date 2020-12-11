@@ -5,21 +5,20 @@
 [ext_resource path="res://Scenes/TargetObjects.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/DistractorObjects.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/CursorTrail.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Fonts/font.tres" type="DynamicFont" id=6]
 
-[sub_resource type="DynamicFont" id=1]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.9513, 392.709 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 23.839, 391.69 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 40
@@ -27,6 +26,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 29
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 60
 font_data = ExtResource( 1 )
 
 [node name="Game" type="Node2D"]
@@ -46,93 +49,106 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TargetObjectsScoreLabel" type="Label" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 8.0
-margin_top = 30.0
-margin_right = 323.0
-margin_bottom = 63.0
-custom_fonts/font = SubResource( 1 )
-text = "Target Objects Hit:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DistractorObjectsScoreLabel" type="Label" parent="."]
-margin_left = 6.22449
-margin_top = 86.0356
-margin_right = 197.224
-margin_bottom = 123.036
-custom_fonts/font = SubResource( 2 )
-text = "Distractor Objects Hit:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MissedObjectsLabel" type="Label" parent="."]
-margin_left = 8.4371
-margin_top = 132.053
-margin_right = 150.437
-margin_bottom = 176.053
-custom_fonts/font = SubResource( 1 )
-text = "Missed Objects: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GameOver" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 416.091
-margin_top = 285.587
-margin_right = 1001.09
-margin_bottom = 390.587
-custom_fonts/font = ExtResource( 6 )
-text = "Game Over!"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TargetObjectsTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="DistractorObjectsTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="GameBoarder" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoarder"]
 position = Vector2( -22.1998, 360.362 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="GameBoarder"]
 position = Vector2( 1384.16, 383.113 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="CursorTrail" parent="." instance=ExtResource( 5 )]
 
-[node name="Start" type="Button" parent="."]
-margin_left = 647.27
-margin_top = 389.549
-margin_right = 767.27
-margin_bottom = 448.549
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1364.0
+margin_bottom = 764.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetObjectsScoreLabel" type="Label" parent="HUD"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 6.2182
+margin_top = -350.833
+margin_right = 321.218
+margin_bottom = -317.833
+custom_fonts/font = SubResource( 3 )
+text = "Target Objects Hit:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistractorObjectsScoreLabel" type="Label" parent="HUD"]
+margin_left = 6.22449
+margin_top = 86.0356
+margin_right = 279.224
+margin_bottom = 123.036
+custom_fonts/font = SubResource( 4 )
+text = "Distractor Objects Hit:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MissedObjectsLabel" type="Label" parent="HUD"]
+margin_left = 8.4371
+margin_top = 132.053
+margin_right = 203.437
+margin_bottom = 176.053
+custom_fonts/font = SubResource( 3 )
+text = "Missed Objects: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.0
+margin_top = 30.0
+margin_right = 113.0
+margin_bottom = 89.0
 custom_fonts/font = SubResource( 5 )
 text = "start"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="."]
+[node name="QuitButton" type="Button" parent="HUD"]
 margin_left = 1207.0
 margin_top = 25.0
 margin_right = 1318.0
 margin_bottom = 79.0
 custom_fonts/font = SubResource( 6 )
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DirectionsLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -136.0
+margin_top = -56.0
+margin_right = 120.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
