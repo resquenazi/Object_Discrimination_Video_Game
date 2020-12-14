@@ -50,7 +50,7 @@ func _ready():
 
 
 func _physics_process(delta): 
-	
+
 	if start and !end:
 		if distractor_object_timer_start == true:
 			$DistractorObjectsTimer.start(distractor_object_timer_length)
@@ -58,7 +58,7 @@ func _physics_process(delta):
 		if target_object_timer_start == true:
 			$TargetObjectsTimer.start(target_object_timer_length)
 			target_object_timer_start = false
-	
+
 	# determine when game ends
 	if start and !end:
 		if missedObjectsPoints >= 10:
@@ -107,6 +107,7 @@ func _on_DistractorObjectsTimer_timeout():
 	if !end:
 		var d = DistractorObjects.instance()
 		d.connect("distractorObjectsPoints", self, "_on_distractor_object_sliced")
+		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
 		d.global_position = Vector2(randi()%900+100, 600) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
 	else:
