@@ -18,6 +18,7 @@ var dateTimeDict = OS.get_datetime()
 var day = dateTimeDict.weekday
 var hour = dateTimeDict.hour
 var minute = dateTimeDict.minute
+var level = 1
 
 # initialize variables for difficulty within level
 var target_object_timer_length = 2 #seconds
@@ -48,6 +49,17 @@ func _ready():
 	MissedObjectsLabel.hide()
 	DistractorObjectsScoreLabel.hide()
 
+func _process(delta):
+	if targetObjectsPoints >= 20:
+		level += 1
+		targetObjectsPoints = 0
+		distractorObjectsPoints = 0
+		missedObjectsPoints = 0
+		if level >= 7:
+			end = true
+			_save()
+			get_tree().change_scene("res://Scenes/Restart.tscn")
+			
 
 func _physics_process(delta): 
 
@@ -97,8 +109,20 @@ func _on_TargetObjectsTimer_timeout():
 		var t = TargetObjects.instance()
 		t.connect("targetObjectsPoints", self, "_on_target_object_sliced")
 		t.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		t.global_position = Vector2(randi()%900+100, 600) #Vector2(#,#) controls x & y start positions of objects
+		t.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
+		if level == 1:
+			t.size = .45
+		if level == 2:
+			t.size = .36
+		if level == 3:
+			t.size = .29
+		if level == 4:
+			t.size = .23
+		if level == 5:
+			t.size = .19
+		if level == 6:
+			t.size = .15
 	else:
 		$TargetObjectsTimer.stop()
 
@@ -108,8 +132,20 @@ func _on_DistractorObjectsTimer_timeout():
 		var d = DistractorObjects.instance()
 		d.connect("distractorObjectsPoints", self, "_on_distractor_object_sliced")
 		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		d.global_position = Vector2(randi()%900+100, 600) #Vector2(#,#) controls x & y start positions of objects
+		d.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
+		if level == 1:
+			d.size = .45
+		if level == 2:
+			d.size = .36
+		if level == 3:
+			d.size = .29
+		if level == 4:
+			d.size = .23
+		if level == 5:
+			d.size = .19
+		if level == 6:
+			d.size = .15
 	else:
 		$DistractorObjectsTimer.stop()
 

@@ -1,0 +1,3 @@
+Target_Objects_Points: 3
+Distractor_Objects_Points: 1
+Missed_Objects: 1
