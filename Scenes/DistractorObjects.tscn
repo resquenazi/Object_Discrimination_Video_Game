@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/DistractorObjects.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 70.0643
+radius = 57.5
 
 [node name="DistractorObjects" type="RigidBody2D"]
 script = ExtResource( 1 )
