@@ -6,11 +6,12 @@ var mousePos = Vector2()
 var jump = randi()%50+250
 var dir = randi()%200-50
 var tex_ref_array = Global.tex_ref_array
-var target_objects = Global.target_objects
+var randN = Global.sample
+var distractor_object = Global.distractor_object
 
 # make objects bounce
 func _ready():
-	$Sprite1.texture = tex_ref_array[target_objects[randi()%target_objects.size()]]
+	$Sprite2.texture = tex_ref_array[distractor_object]
 	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
 
 # make objects disappear when clicked
@@ -22,8 +23,7 @@ func _physics_process(delta):
 		pos.y -= w/2
 		if mousePos.x >= pos.x and mousePos.x <= pos.x + w and mousePos.y >= pos.y \
 		and mousePos.y <= pos.y + w:
-				get_parent().targetObjectsPoints += 1
+				get_parent().distractorObjectsPoints += 1
 				queue_free()
 	if global_position.y > 600:
-		get_parent().fallingObjects +=1
 		queue_free() #clear cache
