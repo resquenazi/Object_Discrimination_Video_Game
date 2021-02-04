@@ -3,6 +3,7 @@ extends Node2D
 ## export scenes
 export (PackedScene) var TargetObjects
 export (PackedScene) var DistractorObjects
+#export (PackedScene) var UserInput
 
 ## initialize game variables
 var quit = false
@@ -58,7 +59,7 @@ func _physics_process(delta):
 		_save()
 
 ## instance scenes
-func _on_Start_pressed():
+func _on_start_pressed():
 	start = true
 	$TargetObjectsScoreLabel.show() 
 	$DistractorObjectsScoreLabel.show()
@@ -66,7 +67,7 @@ func _on_Start_pressed():
 	$TargetObjectsTimer.start()
 	$DistractorObjectsTimer.start()
 	$Start.hide()
-
+	
 func _on_TargetObjectsTimer_timeout():
 	if !end:
 		var t = TargetObjects.instance()
