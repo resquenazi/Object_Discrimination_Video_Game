@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var pos
-var w = 100
+var w = 300
 var mousePos = Vector2()
 var jump = randi()%50+250
 var dir = randi()%200-50

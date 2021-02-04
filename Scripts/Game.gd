@@ -5,6 +5,7 @@ export (PackedScene) var TargetObjects
 export (PackedScene) var DistractorObjects
 
 ## initialize game variables
+var quit = false
 var targetObjectsPoints = 0 #keep score of how many target objects were sliced
 var distractorObjectsPoints = 0
 var fallingObjects = 0 #keep track of missed objects
@@ -12,6 +13,11 @@ var start = false  #start game
 var end = false #end game
 var cDif = 10 #points stuff
 var randN = Global.sample
+var playername = UserInput.playername
+var dateTimeDict = OS.get_datetime()
+var day = dateTimeDict.weekday
+var hour = dateTimeDict.hour
+var minute = dateTimeDict.minute
 
 ## set up variables for menu screen
 onready var distractor_object = Global.distractor_object #index of object to avoid during the game
@@ -20,6 +26,8 @@ var object_labels = ["bowl", "bread", "cheese_grater", "clock", "cup", "pot", "s
 
 ## hide things once user presses start
 func _ready():
+	$Start.connect("pressed", self, "_on_start_pressed")
+	$Quit.connect("pressed", self, "_on_quit_pressed")
 	$TargetObjectsScoreLabel.hide()
 	$MissedObjectsLabel.hide()
 	$DistractorObjectsScoreLabel.hide()
@@ -41,7 +49,9 @@ func _physics_process(delta):
 
 	# beginning directions
 	elif !start and !end:
-		$GameOver.set_text("Avoid the " + str(object_labels[distractor_object]))
+		var object_avoid = str(object_labels[distractor_object])
+		var object_avoid2 = object_avoid.replace("_", " ")
+		$GameOver.set_text("Avoid the " + str(object_avoid2))
 	# end text
 	else:
 		$GameOver.set_text("Game Over!")
@@ -55,7 +65,7 @@ func _on_Start_pressed():
 	$MissedObjectsLabel.show()
 	$TargetObjectsTimer.start()
 	$DistractorObjectsTimer.start()
-	$Menu/Start.hide()
+	$Start.hide()
 
 func _on_TargetObjectsTimer_timeout():
 	if !end:
@@ -78,11 +88,16 @@ func _save():
 	var data = ""
 	data += "Target_Objects_Points: " + str(targetObjectsPoints)
 	data += "\n"
-	data += "Distractor_Objects_Points " + str(distractorObjectsPoints)
+	data += "Distractor_Objects_Points: " + str(distractorObjectsPoints)
 	data += "\n"
 	data += "Missed_Objects: " + str(fallingObjects)
 	var new_file = File.new()
-	new_file.open("res://savegame.txt", File.WRITE)
-	# Store the data and close the file
+	#new_file.open("res://Data/savegame.txt")
+	new_file.open("res://Data/" + str(playername) + "_" + str(day) + "_" + str(hour) + "_" + str(minute) + ".txt", File.WRITE)
+	#Store the data and close the file
 	new_file.store_line(data)
 	new_file.close()
+
+func _on_quit_pressed():
+	_save()
+	get_tree().quit()
