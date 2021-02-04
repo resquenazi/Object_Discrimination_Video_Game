@@ -16,12 +16,17 @@ _global_script_class_icons={
 [application]
 
 config/name="Fruit Ninja Remake"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+
+[display]
+
+window/size/width=1366
+window/size/height=768
 
 [input]
 

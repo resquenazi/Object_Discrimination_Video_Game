@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var pos
-var w = 80
+var w = 100
 var mousePos = Vector2()
 var jump = randi()%50+250
 var dir = randi()%200-50
@@ -24,6 +24,6 @@ func _physics_process(delta):
 		and mousePos.y <= pos.y + w:
 				get_parent().targetObjectsPoints += 1
 				queue_free()
-	if global_position.y > 500:
+	if global_position.y > 600:
 		get_parent().fallingObjects +=1
 		queue_free() #clear cache
