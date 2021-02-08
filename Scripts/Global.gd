@@ -4,8 +4,7 @@ var list = range(0,10)
 var sample =[]
 var distractor_object = []
 var target_objects = []
-var sprite1_texture = []
-var sprite2_texture = []
+
 
 var bowl = preload("res://Sprites/Objects/bowl.png")
 var bread = preload("res://Sprites/Objects/bread.png")
