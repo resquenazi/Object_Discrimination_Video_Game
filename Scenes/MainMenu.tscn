@@ -1,31 +1,28 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=3]
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Fonts/TrulyMadlyDpad-a72o.ttf"
+[sub_resource type="DynamicFont" id=1]
+size = 75
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 85
-font_data = SubResource( 1 )
+size = 40
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 30
+size = 50
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 30
+size = 18
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 23
-font_data = ExtResource( 1 )
-
-[node name="MainMenu" type="Control"]
+[node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,59 +30,67 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.25098, 0.337255, 0.478431, 1 )
+margin_top = 2.68753
+margin_bottom = 2.6875
+color = Color( 0.192157, 0.235294, 0.317647, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameTitle" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -280.0
-margin_top = -284.0
-margin_right = 280.0
-margin_bottom = -182.0
-custom_fonts/font = SubResource( 2 )
+margin_left = -328.11
+margin_top = 85.9501
+margin_right = 328.89
+margin_bottom = 190.95
+custom_fonts/font = SubResource( 1 )
 text = "Object Warriors!"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Quit" type="Button" parent="."]
-margin_left = 1232.0
-margin_top = 21.0
-margin_right = 1326.0
-margin_bottom = 69.0
-custom_fonts/font = SubResource( 3 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 568.5
+margin_top = 18.0
+margin_right = 663.5
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayGame" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -133.796
-margin_top = 91.8776
-margin_right = 147.204
-margin_bottom = 173.878
-custom_fonts/font = SubResource( 4 )
-text = "Play Game"
+margin_left = -162.966
+margin_top = 448.025
+margin_right = 170.034
+margin_bottom = 539.025
+custom_fonts/font = SubResource( 3 )
+text = "play game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Directions" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -382.49
-margin_top = -151.898
-margin_right = 383.51
-margin_bottom = 69.1022
-custom_fonts/font = SubResource( 5 )
+[node name="Label" type="Label" parent="."]
+margin_left = 391.476
+margin_top = 238.211
+margin_right = 983.476
+margin_bottom = 373.211
+custom_fonts/font = SubResource( 4 )
 text = "Directions
-The object of this game is to slash as many objects as possible. To slash an object, hold the left mouse button down and move it through the object. 
+The object of this game is to slash as manyobjects as possible. To slash an object, hold the left mouse button down and move it through the object. 
 
 At the beginning of each game, you will be given a certain object to avoid. Make sure you do not slash this object, as this will negatively effect your score. 
 
-Press \"play game\" to begin."
+Press \"play game\" to begin. "
 align = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
