@@ -6,21 +6,15 @@ export (PackedScene) var DistractorObjects
 
 ## initialize game variables
 var quit = false #quit game
-var targetObjectsPoints = 0 #keep score of how many target objects were sliced
-var distractorObjectsPoints = 0 #keep score of how many distractor objects were sliced
-var missedObjectsPoints = 0 #keep track of missed objects
+var targetObjectsPoints = PlayerData.targetObjectsPoints #keep score of how many target objects were sliced
+var distractorObjectsPoints = PlayerData.distractorObjectsPoints #keep score of distractor objects sliced
+var missedObjectsPoints = PlayerData.missedObjectsPoints #keep track of missed objects
+var level = PlayerData.level
 var start = false  #start game
 var end = false #end game
 var cDif = 10 #points stuff
-var randN = Global.sample #get random number generated from global script
 var playername = UserInput.playername #get player name for saving
-var dateTimeDict = OS.get_datetime()
-var year = dateTimeDict.year
-var month = dateTimeDict.month
-var day = dateTimeDict.day
-var hour = dateTimeDict.hour - 12
-var minute = dateTimeDict.minute
-var level = 1
+
 
 # initialize variables for difficulty within level
 var target_object_timer_length = 2 #seconds
@@ -45,6 +39,7 @@ onready var DirectionsLabel = get_node("HUD/DirectionsLabel")
 
 func _ready():
 	## hide things once user presses start
+	print("Level is " + str(level))
 	StartButton.connect("pressed", self, "_on_start_button_pressed")
 	QuitButton.connect("pressed", self, "_on_quit_button_pressed")
 	TargetObjectsScoreLabel.hide()
@@ -52,14 +47,11 @@ func _ready():
 	DistractorObjectsScoreLabel.hide()
 
 func _process(delta):
-	if targetObjectsPoints >= 20:
-		level += 1
-		targetObjectsPoints = 0
-		distractorObjectsPoints = 0
-		missedObjectsPoints = 0
+	if targetObjectsPoints >= 5:
+		_level_switch()
 		if level >= 7:
 			end = true
-			_save()
+			PlayerData._save()
 			get_tree().change_scene("res://Scenes/Restart.tscn")
 			
 
@@ -77,11 +69,15 @@ func _physics_process(delta):
 	if start and !end:
 		if missedObjectsPoints >= 10:
 			end = true
-			_save()
-			get_tree().change_scene("res://Scenes/Restart.tscn")
+			PlayerData._save()
+			_restart_level()
 		if targetObjectsPoints > cDif:
 			cDif += 10
 			$TargetObjectsTimer.set_wait_time($TargetObjectsTimer.get_wait_time() - 0.1)
+		if distractorObjectsPoints >= 10: 
+			end = true
+			PlayerData._save()
+			_reset()
 
 	# beginning directions
 	elif !start and !end:
@@ -92,7 +88,7 @@ func _physics_process(delta):
 	# end text
 	else:
 		DirectionsLabel.hide()
-		_save()
+		PlayerData._save()
 
 ## instance scenes
 func _on_start_button_pressed():
@@ -151,23 +147,24 @@ func _on_DistractorObjectsTimer_timeout():
 	else:
 		$DistractorObjectsTimer.stop()
 
-func _save():
-	# Create an empty string to hold the information
-	var data = ""
-	data += "Target_Objects_Points: " + str(targetObjectsPoints)
-	data += "\n"
-	data += "Distractor_Objects_Points: " + str(distractorObjectsPoints)
-	data += "\n"
-	data += "Missed_Objects: " + str(missedObjectsPoints)
-	var new_file = File.new()
-	new_file.open("res://Data/" + str(playername) + "_" + str(month) + "_" + str(day) + 
-			"_" + str(year) + "_" +  str(hour) + ":" + str(minute) + ".txt", File.WRITE)
-	#Store the data and close the file
-	new_file.store_line(data)
-	new_file.close()
+func _level_switch():
+	PlayerData._save()
+	PlayerData.level += 1 
+	_reset()
+	get_tree().change_scene("res://Scenes/LevelSwitch.tscn")
+	
+func _restart_level():
+	PlayerData._save()
+	_reset()
+	get_tree().change_scene("res://Scenes/Restart.tscn")
+	
+func _reset():
+	PlayerData._reset_points()
+	Global._reset_objects()
+	Global._ready()
 
 func _on_quit_button_pressed():
-	_save()
+	PlayerData._save()
 	get_tree().quit()
 	
 func _on_target_object_sliced():

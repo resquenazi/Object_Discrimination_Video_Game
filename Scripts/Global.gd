@@ -31,3 +31,10 @@ func _ready():
 	print("Target objects are " + str(target_objects))
 	distractor_object = sample[3]
 	print("Distractor object is " + str(distractor_object))
+
+func _reset_objects():
+	list = range(0,10)
+	sample =[]
+	distractor_object = []
+	target_objects = []
+
