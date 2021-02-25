@@ -16,16 +16,6 @@ var day = dateTimeDict.day
 var hour = dateTimeDict.hour - 12
 var minute = dateTimeDict.minute
 
-var FILE_NAME = "res://Data/" + str(UserInput.playername) + "_" + str(month) + "_" + str(day) + "_" + str(year) + "_" + 	str(hour) + "_" + str(minute) + ".txt"
-
-var player_data = {
-	"name": UserInput.playername,
-	"Target_Objects_Points": targetObjectsPoints,
-	"Distractor_Objects_Points": distractorObjectsPoints,
-	"Missed_Objects_Points": missedObjectsPoints,
-	"Level": level
-}
-
 func set_targetObjectsPoints(value: int) -> void:
 	targetObjectsPoints = value
 	emit_signal("targetObjectsPointsUpdated")
@@ -48,14 +38,19 @@ func _reset_points():
 	missedObjectsPoints = 0
 
 func _save():
+	var FILE_NAME = "res://Data/Becca" + str(month) + "_" + str(day) + "_" + str(year) + ".txt"
 	var data = ""
+	data += "Time: " + str(hour) + ":" + str(minute)
+	data += "Level: " + str(level)
 	data += "Target_Objects_Points: " + str(targetObjectsPoints)
 	data += "\n"
 	data += "Distractor_Objects_Points: " + str(distractorObjectsPoints)
 	data += "\n"
 	data += "Missed_Objects: " + str(missedObjectsPoints)
+	data += "\n"
 	var new_file = File.new()
-	new_file.open(FILE_NAME, File.WRITE)
+	new_file.open(FILE_NAME, File.READ_WRITE)
+	new_file.seek_end()
 	#Store the data and close the file
 	new_file.store_line(data)
 	new_file.close()

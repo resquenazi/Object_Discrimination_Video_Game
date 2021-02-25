@@ -6,16 +6,10 @@ export (PackedScene) var DistractorObjects
 
 ## initialize game variables
 var quit = false #quit game
-var targetObjectsPoints = PlayerData.targetObjectsPoints #keep score of how many target objects were sliced
-var distractorObjectsPoints = PlayerData.distractorObjectsPoints #keep score of distractor objects sliced
-var missedObjectsPoints = PlayerData.missedObjectsPoints #keep track of missed objects
-var level = PlayerData.level
 var start = false  #start game
 var end = false #end game
 var cDif = 10 #points stuff
 var playername = UserInput.playername #get player name for saving
-
-
 # initialize variables for difficulty within level
 var target_object_timer_length = 2 #seconds
 var distractor_object_timer_length = 3 
@@ -39,7 +33,7 @@ onready var DirectionsLabel = get_node("HUD/DirectionsLabel")
 
 func _ready():
 	## hide things once user presses start
-	print("Level is " + str(level))
+	print("Level is " + str(PlayerData.level))
 	StartButton.connect("pressed", self, "_on_start_button_pressed")
 	QuitButton.connect("pressed", self, "_on_quit_button_pressed")
 	TargetObjectsScoreLabel.hide()
@@ -47,9 +41,9 @@ func _ready():
 	DistractorObjectsScoreLabel.hide()
 
 func _process(delta):
-	if targetObjectsPoints >= 5:
+	if PlayerData.targetObjectsPoints >= 5:
 		_level_switch()
-		if level >= 7:
+		if PlayerData.level >= 7:
 			end = true
 			PlayerData._save()
 			get_tree().change_scene("res://Scenes/Restart.tscn")
@@ -67,17 +61,16 @@ func _physics_process(delta):
 
 	# determine when game ends
 	if start and !end:
-		if missedObjectsPoints >= 10:
+		if PlayerData.missedObjectsPoints >= 10:
 			end = true
-			PlayerData._save()
 			_restart_level()
-		if targetObjectsPoints > cDif:
+		if PlayerData.targetObjectsPoints > cDif:
 			cDif += 10
 			$TargetObjectsTimer.set_wait_time($TargetObjectsTimer.get_wait_time() - 0.1)
-		if distractorObjectsPoints >= 10: 
+		if PlayerData.distractorObjectsPoints >= 10: 
+			_restart_level()
 			end = true
-			PlayerData._save()
-			_reset()
+			#_reset()
 
 	# beginning directions
 	elif !start and !end:
@@ -109,17 +102,17 @@ func _on_TargetObjectsTimer_timeout():
 		t.connect("missedObjectsPoints", self, "_on_missed_target_object")
 		t.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
-		if level == 1:
+		if PlayerData.level == 1:
 			t.size = .45
-		if level == 2:
+		if PlayerData.level == 2:
 			t.size = .36
-		if level == 3:
+		if PlayerData.level == 3:
 			t.size = .29
-		if level == 4:
+		if PlayerData.level == 4:
 			t.size = .23
-		if level == 5:
+		if PlayerData.level == 5:
 			t.size = .19
-		if level == 6:
+		if PlayerData.level == 6:
 			t.size = .15
 	else:
 		$TargetObjectsTimer.stop()
@@ -132,17 +125,17 @@ func _on_DistractorObjectsTimer_timeout():
 		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
 		d.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
-		if level == 1:
+		if PlayerData.level == 1:
 			d.size = .45
-		if level == 2:
+		if PlayerData.level == 2:
 			d.size = .36
-		if level == 3:
+		if PlayerData.level == 3:
 			d.size = .29
-		if level == 4:
+		if PlayerData.level == 4:
 			d.size = .23
-		if level == 5:
+		if PlayerData.level == 5:
 			d.size = .19
-		if level == 6:
+		if PlayerData.level == 6:
 			d.size = .15
 	else:
 		$DistractorObjectsTimer.stop()
@@ -150,18 +143,11 @@ func _on_DistractorObjectsTimer_timeout():
 func _level_switch():
 	PlayerData._save()
 	PlayerData.level += 1 
-	_reset()
 	get_tree().change_scene("res://Scenes/LevelSwitch.tscn")
 	
 func _restart_level():
 	PlayerData._save()
-	_reset()
 	get_tree().change_scene("res://Scenes/Restart.tscn")
-	
-func _reset():
-	PlayerData._reset_points()
-	Global._reset_objects()
-	Global._ready()
 
 func _on_quit_button_pressed():
 	PlayerData._save()
@@ -171,16 +157,16 @@ func _on_target_object_sliced():
 	if target_object_timer_length > 0:
 		target_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("target timer" + str(target_object_timer_length))
-	targetObjectsPoints += 1
-	TargetObjectsScoreLabel.set_text("Target Objects Hit: " + str(targetObjectsPoints))
+	PlayerData.targetObjectsPoints += 1
+	TargetObjectsScoreLabel.set_text("Target Objects Hit: " + str(PlayerData.targetObjectsPoints))
 
 func _on_missed_target_object():
-	missedObjectsPoints += 1
-	MissedObjectsLabel.set_text("Missed Objects: " + str(missedObjectsPoints))
+	PlayerData.missedObjectsPoints += 1
+	MissedObjectsLabel.set_text("Missed Objects: " + str(PlayerData.missedObjectsPoints))
 
 func _on_distractor_object_sliced():
 	if distractor_object_timer_length > 0:
 		distractor_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("distractor timer" + str(distractor_object_timer_length))
-	distractorObjectsPoints += 1
-	DistractorObjectsScoreLabel.set_text("Distractor Objects Hit " + str(distractorObjectsPoints))
+	PlayerData.distractorObjectsPoints += 1
+	DistractorObjectsScoreLabel.set_text("Distractor Objects Hit " + str(PlayerData.distractorObjectsPoints))

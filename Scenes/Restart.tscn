@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Restart.gd" type="Script" id=2]
@@ -8,7 +8,7 @@ size = 40
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 60
+size = 80
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -16,6 +16,10 @@ size = 35
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 30
 font_data = ExtResource( 1 )
 
@@ -37,10 +41,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -105.0
-margin_top = 10.0
-margin_right = 105.0
-margin_bottom = 82.0
+margin_left = -82.3214
+margin_top = 100.0
+margin_right = 127.679
+margin_bottom = 172.0
 custom_fonts/font = SubResource( 1 )
 text = "Restart"
 __meta__ = {
@@ -50,10 +54,10 @@ __meta__ = {
 [node name="GameOver" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -148.0
-margin_top = 168.0
-margin_right = 148.0
-margin_bottom = 258.0
+margin_left = -165.639
+margin_top = 133.982
+margin_right = 186.361
+margin_bottom = 223.982
 custom_fonts/font = SubResource( 2 )
 text = "Game Over!"
 align = 1
@@ -63,10 +67,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -326.5
-margin_top = -138.0
-margin_right = 326.5
-margin_bottom = -18.0
+margin_left = -307.601
+margin_top = 0.740112
+margin_right = 345.399
+margin_bottom = 91.7401
 custom_fonts/font = SubResource( 3 )
 text = "You missed too many objects! Restart the game and try to advance to the next level!"
 align = 1
@@ -84,3 +88,39 @@ margin_right = -29.0
 margin_bottom = 86.0
 custom_fonts/font = SubResource( 4 )
 text = "Quit"
+
+[node name="TargetObjectsScoreLabel" type="Label" parent="."]
+margin_left = 559.405
+margin_top = 236.865
+margin_right = 832.405
+margin_bottom = 271.865
+rect_pivot_offset = Vector2( 107.5, 35 )
+custom_fonts/font = SubResource( 5 )
+text = "Target Objects Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistractorObjectsScoreLabel" type="Label" parent="."]
+margin_left = 559.405
+margin_top = 276.865
+margin_right = 877.405
+margin_bottom = 311.865
+rect_pivot_offset = Vector2( 107.5, 35 )
+custom_fonts/font = SubResource( 5 )
+text = "Distractor Objects Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MissedObjectsScoreLabel" type="Label" parent="."]
+margin_left = 559.405
+margin_top = 315.865
+margin_right = 877.405
+margin_bottom = 350.865
+rect_pivot_offset = Vector2( 107.5, 35 )
+custom_fonts/font = SubResource( 5 )
+text = "Missed Objects Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
