@@ -16,6 +16,9 @@ var day = dateTimeDict.day
 var hour = dateTimeDict.hour - 12
 var minute = dateTimeDict.minute
 
+const OPEN_ERROR = 'ERROR: Failed to open "%s". Error code %s.'
+const DIR_ERROR = 'ERROR: Failed to create directory "%s". Error code %s.'
+
 func set_targetObjectsPoints(value: int) -> void:
 	targetObjectsPoints = value
 	emit_signal("targetObjectsPointsUpdated")
@@ -37,11 +40,25 @@ func _reset_points():
 	distractorObjectsPoints = 0
 	missedObjectsPoints = 0
 
+
 func _save():
-	var FILE_NAME = "res://Data/Becca" + str(month) + "_" + str(day) + "_" + str(year) + ".txt"
+	var directory = Directory.new()
+
+	# Potential solution 2:
+	var DIR_PATH = "user://save/" + UserInput.playername + "/"
+	if directory.dir_exists(DIR_PATH):
+		print("Directory exists!")
+	else:
+		var error_code = directory.make_dir_recursive(DIR_PATH)
+		if error_code != OK:
+			printerr(DIR_ERROR % [DIR_PATH, error_code])
+
+	var FILE_NAME = DIR_PATH + str(month) + "_" + str(day) + "_" + str(year) + ".txt"
 	var data = ""
 	data += "Time: " + str(hour) + ":" + str(minute)
+	data += "\n"
 	data += "Level: " + str(level)
+	data += "\n"
 	data += "Target_Objects_Points: " + str(targetObjectsPoints)
 	data += "\n"
 	data += "Distractor_Objects_Points: " + str(distractorObjectsPoints)
@@ -49,9 +66,19 @@ func _save():
 	data += "Missed_Objects: " + str(missedObjectsPoints)
 	data += "\n"
 	var new_file = File.new()
-	new_file.open(FILE_NAME, File.READ_WRITE)
-	new_file.seek_end()
-	#Store the data and close the file
-	new_file.store_line(data)
-	new_file.close()
-	print("file saved!")
+
+	var error_code
+	if new_file.file_exists(FILE_NAME):
+		error_code = new_file.open(FILE_NAME, File.READ_WRITE)
+	else:
+		error_code = new_file.open(FILE_NAME, File.WRITE)
+
+	if error_code == OK:
+		new_file.seek_end()
+		#Store the data and close the file
+		new_file.store_line(data)
+		new_file.close()
+		print("file saved!")
+	else:
+		printerr(OPEN_ERROR % [FILE_NAME, error_code])
+	
