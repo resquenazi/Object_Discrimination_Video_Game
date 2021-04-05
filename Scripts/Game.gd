@@ -9,6 +9,7 @@ var quit = false #quit game
 var start = false  #start game
 var end = false #end game
 var cDif = 10 #points stuff
+var countdown = 4
 var playername = UserInput.playername #get player name for saving
 # initialize variables for difficulty within level
 var target_object_timer_length = 2 #seconds
@@ -19,8 +20,13 @@ export var level_change_speed = .01 #number of seconds to subtract from timer wh
 
 ## set up variables for menu screen
 onready var distractor_object = Global.distractor_object #index of object to avoid during the game
-var object_labels = ["bowl", "bread", "cheese_grater", "clock", "cup", "pot", "straws",
- "tissue_paper", "toilet_paper", "tooth_paste"] #for display of object to avoid
+
+var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "baseball_glove", "bath_tub", "beer_mug", "bicycle",
+ "binoculars", "boom_box", "boxing_glove", "calculator", "computer_monitor", "cowboy_hat", "desk_globe", "dumbell", "electric_guitar",
+"fire_extinguisher", "flash_light", "football_helmet", "french_horn", "frying_pan", "iPod", "keyboard", "knife", "lawn_mower", 
+"light_bulb", "megaphone", "microwave", "neck_tie", "rotary_phone", "skate_board", "soccer_ball", "sock", "soda_can", "t_shirt",
+"tea_kettle", "top_hat"] #for display of object to avoid
+
 
 #HUD Stuff
 onready var TargetObjectsScoreLabel = get_node("HUD/TargetObjectsScoreLabel")
@@ -29,6 +35,8 @@ onready var MissedObjectsLabel = get_node("HUD/MissedObjectsLabel")
 onready var StartButton = get_node("HUD/StartButton")
 onready var QuitButton = get_node("HUD/QuitButton")
 onready var DirectionsLabel = get_node("HUD/DirectionsLabel")
+onready var CountdownLabel = get_node("HUD/CountdownLabel")
+onready var EnableFilt = get_node("HUD/EnableFilt")
 
 
 
@@ -40,6 +48,9 @@ func _ready():
 	TargetObjectsScoreLabel.hide()
 	MissedObjectsLabel.hide()
 	DistractorObjectsScoreLabel.hide()
+	EnableFilt.hide()
+	MusicController.play_game_music()
+
 
 func _process(delta):
 	if PlayerData.targetObjectsPoints >= 5:
@@ -51,7 +62,7 @@ func _process(delta):
 			
 
 func _physics_process(delta): 
-
+	
 	if start and !end:
 		if distractor_object_timer_start == true:
 			$DistractorObjectsTimer.start(distractor_object_timer_length)
@@ -86,14 +97,13 @@ func _physics_process(delta):
 
 ## instance scenes
 func _on_start_button_pressed():
-	start = true
+	$enableFiltSound.play()
+	EnableFilt.show()
+	$CountDownTimer.start()
 	TargetObjectsScoreLabel.show() 
 	DistractorObjectsScoreLabel.show()
 	MissedObjectsLabel.show()
-	$TargetObjectsTimer.start()
-	$DistractorObjectsTimer.start()
 	StartButton.hide()
-	DirectionsLabel.hide()
 	
 func _on_TargetObjectsTimer_timeout():
 	target_object_timer_start = true
@@ -158,6 +168,7 @@ func _on_target_object_sliced():
 	if target_object_timer_length > 0:
 		target_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("target timer" + str(target_object_timer_length))
+	$targetObjectPointSound.play()
 	PlayerData.targetObjectsPoints += 1
 	TargetObjectsScoreLabel.set_text("Target Objects Hit: " + str(PlayerData.targetObjectsPoints))
 
@@ -169,5 +180,26 @@ func _on_distractor_object_sliced():
 	if distractor_object_timer_length > 0:
 		distractor_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("distractor timer" + str(distractor_object_timer_length))
+	$distractorObjectPointSound.play()
 	PlayerData.distractorObjectsPoints += 1
 	DistractorObjectsScoreLabel.set_text("Distractor Objects Hit " + str(PlayerData.distractorObjectsPoints))
+
+
+func _on_CountDownTimer_timeout():
+	countdown -= 1
+	print(str(countdown))
+	if not countdown == 0:
+		CountdownLabel.set_text(str(countdown))
+		
+	else:
+		start = true
+		$TargetObjectsTimer.start()
+		$DistractorObjectsTimer.start()
+		$CountDownTimer.stop()
+		DirectionsLabel.hide()
+		CountdownLabel.hide()
+		EnableFilt.hide()
+
+	
+	
+

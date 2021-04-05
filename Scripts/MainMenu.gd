@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	MusicController.play_game_music()
 	$PlayGame.connect("pressed", self, "PlayGame")
 	$Quit.connect("pressed", self, "Quit")
 

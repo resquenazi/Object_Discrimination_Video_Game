@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/WrongObj.wav-296c80bdca7d504926e43bdfc311a902.sample"
+
+[deps]
+
+source_file="res://Music/WrongObj.wav"
+dest_files=[ "res://.import/WrongObj.wav-296c80bdca7d504926e43bdfc311a902.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

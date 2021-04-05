@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Restart.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Background/Background.jpg" type="Texture" id=3]
+[ext_resource path="res://Music/DisableFilt.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 40
+size = 80
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 80
+size = 40
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -31,36 +33,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 684.065, 382.362 )
+scale = Vector2( 0.455606, 0.382824 )
+texture = ExtResource( 3 )
+
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1365.0
-margin_bottom = 765.0
-color = Color( 0.192157, 0.235294, 0.317647, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -509.5
+margin_top = -250.5
+margin_right = 509.5
+margin_bottom = 250.5
+color = Color( 0.192157, 0.235294, 0.317647, 0.403922 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Label" parent="ColorRect"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -176.0
+margin_top = 25.0
+margin_right = 176.0
+margin_bottom = 115.0
+custom_fonts/font = SubResource( 1 )
+text = "Game Over!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RestartButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -82.3214
-margin_top = 100.0
-margin_right = 127.679
-margin_bottom = 172.0
-custom_fonts/font = SubResource( 1 )
+margin_left = -100.281
+margin_top = 126.122
+margin_right = 109.72
+margin_bottom = 198.122
+custom_fonts/font = SubResource( 2 )
 text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="GameOver" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -165.639
-margin_top = 133.982
-margin_right = 186.361
-margin_bottom = 223.982
-custom_fonts/font = SubResource( 2 )
-text = "Game Over!"
-align = 1
 
 [node name="RestartDirections" type="Label" parent="."]
 anchor_left = 0.5
@@ -68,9 +87,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -307.601
-margin_top = 0.740112
+margin_top = 25.7401
 margin_right = 345.399
-margin_bottom = 91.7401
+margin_bottom = 116.74
 custom_fonts/font = SubResource( 3 )
 text = "You missed too many objects! Restart the game and try to advance to the next level!"
 align = 1
@@ -90,10 +109,10 @@ custom_fonts/font = SubResource( 4 )
 text = "Quit"
 
 [node name="TargetObjectsScoreLabel" type="Label" parent="."]
-margin_left = 559.405
-margin_top = 236.865
-margin_right = 832.405
-margin_bottom = 271.865
+margin_left = 534.711
+margin_top = 264.11
+margin_right = 807.711
+margin_bottom = 299.11
 rect_pivot_offset = Vector2( 107.5, 35 )
 custom_fonts/font = SubResource( 5 )
 text = "Target Objects Score: "
@@ -102,10 +121,10 @@ __meta__ = {
 }
 
 [node name="DistractorObjectsScoreLabel" type="Label" parent="."]
-margin_left = 559.405
-margin_top = 276.865
-margin_right = 877.405
-margin_bottom = 311.865
+margin_left = 534.711
+margin_top = 304.11
+margin_right = 852.711
+margin_bottom = 339.11
 rect_pivot_offset = Vector2( 107.5, 35 )
 custom_fonts/font = SubResource( 5 )
 text = "Distractor Objects Score: "
@@ -114,13 +133,16 @@ __meta__ = {
 }
 
 [node name="MissedObjectsScoreLabel" type="Label" parent="."]
-margin_left = 559.405
-margin_top = 315.865
-margin_right = 877.405
-margin_bottom = 350.865
+margin_left = 534.711
+margin_top = 343.11
+margin_right = 852.711
+margin_bottom = 378.11
 rect_pivot_offset = Vector2( 107.5, 35 )
 custom_fonts/font = SubResource( 5 )
 text = "Missed Objects Score: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="disableFilt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

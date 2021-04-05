@@ -9,8 +9,11 @@ onready var TargetObjectsPoints = PlayerData.targetObjectsPoints
 onready var DistractorObjectsPoints = PlayerData.distractorObjectsPoints
 onready var MissedObjectsPoints = PlayerData.missedObjectsPoints
 
-var object_labels = ["bowl", "bread", "cheese_grater", "clock", "cup", "pot", "straws",
- "tissue_paper", "toilet_paper", "tooth_paste"] #for display of object to avoid
+var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "baseball_glove", "bath_tub", "beer_mug", "bicycle",
+ "binoculars", "boom_box", "boxing_glove", "calculator", "computer_monitor", "cowboy_hat", "desk_globe", "dumbell", "electric_guitar",
+"fire_extinguisher", "flash_light", "football_helmet", "french_horn", "frying_pan", "iPod", "keyboard", "knife", "lawn_mower", 
+"light_bulb", "megaphone", "microwave", "neck_tie", "rotary_phone", "skate_board", "soccer_ball", "sock", "soda_can", "t_shirt",
+"tea_kettle", "top_hat"] #for display of object to avoid
 
 func _ready():
 	$Start.connect("pressed", self, "Start")
@@ -26,6 +29,8 @@ func _ready():
 		LevelNum.set_text("5")
 	if PlayerData.level == 6:
 		LevelNum.set_text("6")
+	
+	$disableFilt.play()
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
 	
