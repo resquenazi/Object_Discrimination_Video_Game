@@ -92,7 +92,7 @@ position = Vector2( -22.1998, 360.362 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="GameBoarder"]
-position = Vector2( 1390.83, 379.108 )
+position = Vector2( 1451.64, 366.054 )
 shape = SubResource( 2 )
 
 [node name="CursorTrail" parent="." instance=ExtResource( 5 )]
@@ -100,8 +100,8 @@ shape = SubResource( 2 )
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1364.0
-margin_bottom = 764.0
+margin_right = 1430.0
+margin_bottom = 655.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -109,10 +109,10 @@ __meta__ = {
 [node name="TargetObjectsScoreLabel" type="Label" parent="HUD"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 6.2182
-margin_top = -350.833
-margin_right = 321.218
-margin_bottom = -317.833
+margin_left = 5.15872
+margin_top = -296.8
+margin_right = 320.159
+margin_bottom = -263.8
 custom_fonts/font = SubResource( 3 )
 text = "Target Objects Hit:"
 __meta__ = {
@@ -146,10 +146,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -81.0
-margin_top = 30.0
-margin_right = 113.0
-margin_bottom = 89.0
+margin_left = -89.4757
+margin_top = 133.827
+margin_right = 104.524
+margin_bottom = 192.827
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 6 )
 text = "start"
@@ -175,9 +175,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -202.0
-margin_top = -56.0
+margin_top = 22.0
 margin_right = 54.0
-margin_bottom = 30.0
+margin_bottom = 108.0
 custom_fonts/font = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -189,9 +189,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -96.0
-margin_top = -139.5
+margin_top = -76.9917
 margin_right = 96.0
-margin_bottom = -60.5
+margin_bottom = 2.00833
 custom_fonts/font = SubResource( 10 )
 align = 1
 __meta__ = {
@@ -211,14 +211,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="targetObjectPointSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-
-[node name="distractorObjectPointSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-
 [node name="enableFiltSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="targetObjectsPointsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 5.048
+
+[node name="distractorObjectsPointsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 9.087
 [connection signal="timeout" from="TargetObjectsTimer" to="." method="_on_TargetObjectsTimer_timeout"]
 [connection signal="timeout" from="DistractorObjectsTimer" to="." method="_on_DistractorObjectsTimer_timeout"]
 [connection signal="timeout" from="CountDownTimer" to="." method="_on_CountDownTimer_timeout"]

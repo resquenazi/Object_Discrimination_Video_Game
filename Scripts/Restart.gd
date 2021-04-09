@@ -1,6 +1,6 @@
 extends Control
 
-onready var RestartDirections = get_node("RestartDirections")
+onready var RestartDirections = get_node("ColorRect/RestartDirections")
 onready var TargetObjectsScoreLabel = get_node("TargetObjectsScoreLabel")
 onready var DistractorObjectsScoreLabel = get_node("DistractorObjectsScoreLabel")
 onready var MissedObjectsScoreLabel = get_node("MissedObjectsScoreLabel")
@@ -16,12 +16,12 @@ var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "ba
 "tea_kettle", "top_hat"] #for display of object to avoid
 
 func _ready():
-	$RestartButton.connect("pressed", self, "RestartGame")
+	$ColorRect/RestartButton.connect("pressed", self, "RestartGame")
 	$Quit.connect("pressed", self, "Quit")
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
 	
-	$disableFilt.play()
+	#$disableFilt.play()
 	
 	var object_avoid = str(object_labels[distractor_object])
 	var object_avoid2 = object_avoid.replace("_", " ")

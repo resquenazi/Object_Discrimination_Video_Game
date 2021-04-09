@@ -38,8 +38,6 @@ onready var DirectionsLabel = get_node("HUD/DirectionsLabel")
 onready var CountdownLabel = get_node("HUD/CountdownLabel")
 onready var EnableFilt = get_node("HUD/EnableFilt")
 
-
-
 func _ready():
 	## hide things once user presses start
 	print("Level is " + str(PlayerData.level))
@@ -111,20 +109,20 @@ func _on_TargetObjectsTimer_timeout():
 		var t = TargetObjects.instance()
 		t.connect("targetObjectsPoints", self, "_on_target_object_sliced")
 		t.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		t.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
+		t.global_position = Vector2(randi()%1000+100, 800) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
 		if PlayerData.level == 1:
-			t.size = .45
+			t.size = .35
 		if PlayerData.level == 2:
-			t.size = .36
+			t.size = .26
 		if PlayerData.level == 3:
-			t.size = .29
-		if PlayerData.level == 4:
-			t.size = .23
-		if PlayerData.level == 5:
 			t.size = .19
+		if PlayerData.level == 4:
+			t.size = .13
+		if PlayerData.level == 5:
+			t.size = .9
 		if PlayerData.level == 6:
-			t.size = .15
+			t.size = .5
 	else:
 		$TargetObjectsTimer.stop()
 
@@ -134,20 +132,20 @@ func _on_DistractorObjectsTimer_timeout():
 		var d = DistractorObjects.instance()
 		d.connect("distractorObjectsPoints", self, "_on_distractor_object_sliced")
 		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		d.global_position = Vector2(randi()%900+100, 850) #Vector2(#,#) controls x & y start positions of objects
+		d.global_position = Vector2(randi()%1000+100, 800) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
 		if PlayerData.level == 1:
-			d.size = .45
+			d.size = .35
 		if PlayerData.level == 2:
-			d.size = .36
+			d.size = .26
 		if PlayerData.level == 3:
-			d.size = .29
-		if PlayerData.level == 4:
-			d.size = .23
-		if PlayerData.level == 5:
 			d.size = .19
+		if PlayerData.level == 4:
+			d.size = .13
+		if PlayerData.level == 5:
+			d.size = .9
 		if PlayerData.level == 6:
-			d.size = .15
+			d.size = .5
 	else:
 		$DistractorObjectsTimer.stop()
 
@@ -168,8 +166,8 @@ func _on_target_object_sliced():
 	if target_object_timer_length > 0:
 		target_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("target timer" + str(target_object_timer_length))
-	$targetObjectPointSound.play()
 	PlayerData.targetObjectsPoints += 1
+	$targetObjectsPointsSound.play()
 	TargetObjectsScoreLabel.set_text("Target Objects Hit: " + str(PlayerData.targetObjectsPoints))
 
 func _on_missed_target_object():
@@ -180,8 +178,8 @@ func _on_distractor_object_sliced():
 	if distractor_object_timer_length > 0:
 		distractor_object_timer_length -= level_change_speed #increase difficulty of game by making objects spawn faster
 		print("distractor timer" + str(distractor_object_timer_length))
-	$distractorObjectPointSound.play()
 	PlayerData.distractorObjectsPoints += 1
+	$distractorObjectsPointsSound.play()
 	DistractorObjectsScoreLabel.set_text("Distractor Objects Hit " + str(PlayerData.distractorObjectsPoints))
 
 
@@ -199,7 +197,3 @@ func _on_CountDownTimer_timeout():
 		DirectionsLabel.hide()
 		CountdownLabel.hide()
 		EnableFilt.hide()
-
-	
-	
-

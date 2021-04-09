@@ -28,8 +28,8 @@ MusicController="*res://Scenes/MusicController.tscn"
 
 [display]
 
-window/size/width=1366
-window/size/height=768
+window/size/width=1430
+window/size/height=655
 
 [input]
 

@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+const PIECES = preload("res://Scenes/ItemPieces.tscn")
+
 var pos
 var w = 300
 var mousePos = Vector2()
@@ -14,7 +16,6 @@ var start = true
 
 # make objects bounce
 func _ready():
-	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite1.rotation_degrees = rand_range(-180, 180)
 	$Sprite1.texture = tex_ref_array[target_objects[randi()%target_objects.size()]]
 	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
@@ -23,6 +24,7 @@ func _ready():
 # make objects disappear when clicked
 func _physics_process(delta):
 	$Sprite1.scale = Vector2(size, size)
+	visible = true
 	w = size * 300
 	if Input.is_action_just_pressed("click"):
 		mousePos = get_global_mouse_position()
@@ -33,6 +35,11 @@ func _physics_process(delta):
 		and mousePos.y <= pos.y + w:
 				emit_signal("targetObjectsPoints")
 				queue_free()
+				var a  = PIECES.instance()
+				get_parent().add_child(a)
+				a.global_position = global_position
+				a.scale.x *= size
+				a.scale.y *= size
 	if global_position.y > 851:
 		emit_signal("missedObjectsPoints")
 		queue_free() #clear cache
@@ -42,9 +49,9 @@ func _physics_process(delta):
 
 func _on_Area2D_body_entered(body):
 	if start == true:
-		global_position.x = rand_range(750, 680)
+		global_position.x = rand_range(850, 780)
 
 
 func _on_Timer_timeout():
-	$CollisionShape2D.set_deferred("disabled", false)
+	$Area2D/CollisionShape2D.disabled = true
 	start = false
