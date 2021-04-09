@@ -10,7 +10,7 @@ var dir = randi()%200-50
 var tex_ref_array = Global.tex_ref_array
 var target_objects = Global.target_objects
 var distractor_object = Global.distractor_object
-signal targetObjectsPoints
+signal distractorObjectsPoints
 signal missedObjectsPoints
 var size = 1
 var start = true
@@ -25,7 +25,7 @@ func _ready():
 func _physics_process(delta):
 	$Sprite2.scale = Vector2(size, size)
 	visible = true
-	w = size * 300
+	w = size * 600
 	if Input.is_action_just_pressed("click"):
 		mousePos = get_global_mouse_position()
 		pos = global_position
@@ -49,7 +49,7 @@ func _physics_process(delta):
 
 func _on_Area2D_body_entered(body):
 	if start == true:
-		global_position.x = rand_range(850, 780)
+		global_position.x = rand_range(1200, 80)
 
 
 func _on_Timer_timeout():

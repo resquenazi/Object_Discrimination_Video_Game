@@ -25,7 +25,7 @@ func _ready():
 func _physics_process(delta):
 	$Sprite1.scale = Vector2(size, size)
 	visible = true
-	w = size * 300
+	w = size * 600
 	if Input.is_action_just_pressed("click"):
 		mousePos = get_global_mouse_position()
 		pos = global_position
@@ -49,7 +49,7 @@ func _physics_process(delta):
 
 func _on_Area2D_body_entered(body):
 	if start == true:
-		global_position.x = rand_range(850, 780)
+		global_position.x = rand_range(1200, 80)
 
 
 func _on_Timer_timeout():

@@ -109,7 +109,7 @@ func _on_TargetObjectsTimer_timeout():
 		var t = TargetObjects.instance()
 		t.connect("targetObjectsPoints", self, "_on_target_object_sliced")
 		t.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		t.global_position = Vector2(randi()%1000+100, 800) #Vector2(#,#) controls x & y start positions of objects
+		t.global_position = Vector2(randi()%1000+100, 700) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
 		if PlayerData.level == 1:
 			t.size = .35
@@ -132,7 +132,7 @@ func _on_DistractorObjectsTimer_timeout():
 		var d = DistractorObjects.instance()
 		d.connect("distractorObjectsPoints", self, "_on_distractor_object_sliced")
 		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		d.global_position = Vector2(randi()%1000+100, 800) #Vector2(#,#) controls x & y start positions of objects
+		d.global_position = Vector2(randi()%1000+100, 700) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
 		if PlayerData.level == 1:
 			d.size = .35
