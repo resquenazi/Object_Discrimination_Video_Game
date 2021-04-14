@@ -20,6 +20,7 @@ func _ready():
 	$Sprite2.rotation_degrees = rand_range(-180, 180)
 	$Sprite2.texture = tex_ref_array[distractor_object]
 	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
+	$ScreenTimer.start()
 
 # make objects disappear when clicked
 func _physics_process(delta):
@@ -40,7 +41,7 @@ func _physics_process(delta):
 				a.global_position = global_position
 				a.scale.x *= size
 				a.scale.y *= size
-	if global_position.y > 851:
+	if global_position.y > 690:
 		emit_signal("missedObjectsPoints")
 		queue_free() #clear cache
 		$Area2D.scale = Vector2($Sprite2.scale.x, $Sprite2.scale.y)
@@ -55,3 +56,7 @@ func _on_Area2D_body_entered(body):
 func _on_Timer_timeout():
 	$Area2D/CollisionShape2D.disabled = true
 	start = false
+	
+
+func _on_ScreenTimer_timeout():
+	queue_free()

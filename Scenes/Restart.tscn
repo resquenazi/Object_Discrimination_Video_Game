@@ -101,12 +101,15 @@ __meta__ = {
 [node name="Quit" type="Button" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -156.714
-margin_top = 25.5305
-margin_right = -41.7139
-margin_bottom = 72.5305
+margin_left = -171.397
+margin_top = 44.2182
+margin_right = -56.3972
+margin_bottom = 91.2182
 custom_fonts/font = SubResource( 4 )
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TargetObjectsScoreLabel" type="Label" parent="."]
 margin_left = 561.65

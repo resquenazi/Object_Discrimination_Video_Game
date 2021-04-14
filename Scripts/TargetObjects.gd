@@ -40,7 +40,7 @@ func _physics_process(delta):
 				a.global_position = global_position
 				a.scale.x *= size
 				a.scale.y *= size
-	if global_position.y > 851:
+	if global_position.y > 690:
 		emit_signal("missedObjectsPoints")
 		queue_free() #clear cache
 		$Area2D.scale = Vector2($Sprite1.scale.x, $Sprite1.scale.y)

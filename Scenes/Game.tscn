@@ -158,10 +158,10 @@ __meta__ = {
 }
 
 [node name="QuitButton" type="Button" parent="HUD"]
-margin_left = 1207.0
-margin_top = 25.0
-margin_right = 1318.0
-margin_bottom = 79.0
+margin_left = 1200.33
+margin_top = 73.0542
+margin_right = 1311.33
+margin_bottom = 127.054
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 8 )
 text = "Quit"

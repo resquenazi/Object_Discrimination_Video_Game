@@ -21,7 +21,7 @@ func _ready():
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
 	
-	#$disableFilt.play()
+	$disableFilt.play()
 	
 	var object_avoid = str(object_labels[distractor_object])
 	var object_avoid2 = object_avoid.replace("_", " ")

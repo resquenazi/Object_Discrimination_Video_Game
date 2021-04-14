@@ -9,7 +9,7 @@ var quit = false #quit game
 var start = false  #start game
 var end = false #end game
 var cDif = 10 #points stuff
-var countdown = 4
+var countdown = 11
 var playername = UserInput.playername #get player name for saving
 # initialize variables for difficulty within level
 var target_object_timer_length = 2 #seconds
@@ -51,7 +51,7 @@ func _ready():
 
 
 func _process(delta):
-	if PlayerData.targetObjectsPoints >= 5:
+	if PlayerData.targetObjectsPoints >= 25:
 		_level_switch()
 		if PlayerData.level >= 7:
 			end = true
@@ -71,13 +71,13 @@ func _physics_process(delta):
 
 	# determine when game ends
 	if start and !end:
-		if PlayerData.missedObjectsPoints >= 10:
+		if PlayerData.missedObjectsPoints >= 25:
 			end = true
 			_restart_level()
 		if PlayerData.targetObjectsPoints > cDif:
 			cDif += 10
 			$TargetObjectsTimer.set_wait_time($TargetObjectsTimer.get_wait_time() - 0.1)
-		if PlayerData.distractorObjectsPoints >= 10: 
+		if PlayerData.distractorObjectsPoints >= 25: 
 			_restart_level()
 			end = true
 			#_reset()
@@ -109,7 +109,7 @@ func _on_TargetObjectsTimer_timeout():
 		var t = TargetObjects.instance()
 		t.connect("targetObjectsPoints", self, "_on_target_object_sliced")
 		t.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		t.global_position = Vector2(randi()%1000+100, 700) #Vector2(#,#) controls x & y start positions of objects
+		t.global_position = Vector2(randi()%1000+100, 680) #Vector2(#,#) controls x & y start positions of objects
 		add_child(t)
 		if PlayerData.level == 1:
 			t.size = .35
@@ -120,9 +120,9 @@ func _on_TargetObjectsTimer_timeout():
 		if PlayerData.level == 4:
 			t.size = .13
 		if PlayerData.level == 5:
-			t.size = .9
+			t.size = .09
 		if PlayerData.level == 6:
-			t.size = .5
+			t.size = .05
 	else:
 		$TargetObjectsTimer.stop()
 
@@ -132,7 +132,7 @@ func _on_DistractorObjectsTimer_timeout():
 		var d = DistractorObjects.instance()
 		d.connect("distractorObjectsPoints", self, "_on_distractor_object_sliced")
 		d.connect("missedObjectsPoints", self, "_on_missed_target_object")
-		d.global_position = Vector2(randi()%1000+100, 700) #Vector2(#,#) controls x & y start positions of objects
+		d.global_position = Vector2(randi()%1000+100, 680) #Vector2(#,#) controls x & y start positions of objects
 		add_child(d)
 		if PlayerData.level == 1:
 			d.size = .35
@@ -143,9 +143,9 @@ func _on_DistractorObjectsTimer_timeout():
 		if PlayerData.level == 4:
 			d.size = .13
 		if PlayerData.level == 5:
-			d.size = .9
+			d.size = .09
 		if PlayerData.level == 6:
-			d.size = .5
+			d.size = .05
 	else:
 		$DistractorObjectsTimer.stop()
 

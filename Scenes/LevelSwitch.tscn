@@ -89,9 +89,9 @@ __meta__ = {
 }
 
 [node name="LevelNum" type="Label" parent="."]
-margin_left = 955.366
+margin_left = 882.959
 margin_top = 390.941
-margin_right = 977.366
+margin_right = 904.959
 margin_bottom = 438.941
 custom_fonts/font = SubResource( 3 )
 text = "2"
@@ -117,10 +117,10 @@ __meta__ = {
 [node name="Quit" type="Button" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -161.009
-margin_top = 21.0
-margin_right = -36.009
-margin_bottom = 72.0
+margin_left = -167.683
+margin_top = 31.6787
+margin_right = -42.6833
+margin_bottom = 82.6787
 custom_fonts/font = SubResource( 5 )
 text = "Quit"
 __meta__ = {

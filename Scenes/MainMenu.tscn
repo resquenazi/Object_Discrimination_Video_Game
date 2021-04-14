@@ -49,10 +49,10 @@ texture = ExtResource( 2 )
 [node name="Quit" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 568.5
-margin_top = 18.0
-margin_right = 663.5
-margin_bottom = 67.0
+margin_left = 544.473
+margin_top = 43.362
+margin_right = 639.473
+margin_bottom = 92.362
 custom_fonts/font = SubResource( 1 )
 text = "Quit"
 __meta__ = {
