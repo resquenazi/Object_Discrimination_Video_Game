@@ -4,7 +4,7 @@ onready var LevelNum = get_node("LevelNum")
 onready var TargetObjectsScoreLabel = get_node("TargetObjectsScoreLabel")
 onready var DistractorObjectsScoreLabel = get_node("DistractorObjectsScoreLabel")
 onready var MissedObjectsScoreLabel = get_node("MissedObjectsScoreLabel")
-onready var distractor_object = Global.distractor_object #index of object to avoid during the game
+onready var distractor_objects = Global.distractor_objects #index of object to avoid during the game
 onready var TargetObjectsPoints = PlayerData.targetObjectsPoints
 onready var DistractorObjectsPoints = PlayerData.distractorObjectsPoints
 onready var MissedObjectsPoints = PlayerData.missedObjectsPoints
@@ -33,10 +33,7 @@ func _ready():
 	$disableFilt.play()
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
-	
-	var object_avoid = str(object_labels[distractor_object])
-	var object_avoid2 = object_avoid.replace("_", " ")
-	DistractorObjectsScoreLabel.set_text("Number of " + str(object_avoid2) + " hit: " + str(DistractorObjectsPoints))
+	DistractorObjectsScoreLabel.set_text("Number of distractors hit" + str(DistractorObjectsPoints))
 	
 	MissedObjectsScoreLabel.set_text("Number of missed objects: " + str(MissedObjectsPoints))
 

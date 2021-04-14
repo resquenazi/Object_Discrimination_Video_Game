@@ -13,8 +13,9 @@ var dateTimeDict = OS.get_datetime()
 var year = dateTimeDict.year
 var month = dateTimeDict.month
 var day = dateTimeDict.day
-var hour = dateTimeDict.hour - 12
+var hour = dateTimeDict.hour 
 var minute = dateTimeDict.minute
+var time_return = String(hour) + ":" + String(minute)
 
 const OPEN_ERROR = 'ERROR: Failed to open "%s". Error code %s.'
 const DIR_ERROR = 'ERROR: Failed to create directory "%s". Error code %s.'
@@ -43,7 +44,7 @@ func _reset_points():
 
 func _save():
 	var directory = Directory.new()
-
+	
 	# Potential solution 2:
 	var DIR_PATH = "user://save/" + UserInput.playername + "/"
 	if directory.dir_exists(DIR_PATH):
@@ -55,7 +56,7 @@ func _save():
 
 	var FILE_NAME = DIR_PATH + str(month) + "_" + str(day) + "_" + str(year) + ".txt"
 	var data = ""
-	data += "Time: " + str(hour) + ":" + str(minute)
+	data += "Time: " + str(time_return)
 	data += "\n"
 	data += "Level: " + str(level)
 	data += "\n"

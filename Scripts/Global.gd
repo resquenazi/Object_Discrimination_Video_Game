@@ -2,7 +2,7 @@ extends Node
 
 var list = range(0,38)
 var sample =[]
-var distractor_object = []
+var distractor_objects = []
 var target_objects = []
 
 
@@ -54,19 +54,19 @@ tea_kettle, top_hat]
 
 func _ready():
 	randomize()
-	for i in range(4):
+	for i in range(6):
 		var x = randi()%list.size()
 		sample.append(list[x])
 		list.remove(x)
 	print("Array is " + str(sample))
-	target_objects = sample.slice(0,2)
+	target_objects = sample.slice(0,3)
 	print("Target objects are " + str(target_objects))
-	distractor_object = sample[3]
-	print("Distractor object is " + str(distractor_object))
+	distractor_objects = sample.slice(4,5)
+	print("Distractor objects are " + str(distractor_objects))
 
 func _reset_objects():
 	list = range(0,10)
 	sample =[]
-	distractor_object = []
+	distractor_objects = []
 	target_objects = []
 

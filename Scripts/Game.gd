@@ -16,10 +16,10 @@ var target_object_timer_length = 2 #seconds
 var distractor_object_timer_length = 3 
 var distractor_object_timer_start = true
 var target_object_timer_start = true
-export var level_change_speed = .01 #number of seconds to subtract from timer when player gets score
+export var level_change_speed = .03 #number of seconds to subtract from timer when player gets score
 
 ## set up variables for menu screen
-onready var distractor_object = Global.distractor_object #index of object to avoid during the game
+onready var distractor_objects = Global.distractor_objects #index of object to avoid during the game
 
 var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "baseball_glove", "bath_tub", "beer_mug", "bicycle",
  "binoculars", "boom_box", "boxing_glove", "calculator", "computer_monitor", "cowboy_hat", "desk_globe", "dumbell", "electric_guitar",
@@ -33,7 +33,6 @@ onready var TargetObjectsScoreLabel = get_node("HUD/TargetObjectsScoreLabel")
 onready var DistractorObjectsScoreLabel = get_node("HUD/DistractorObjectsScoreLabel")
 onready var MissedObjectsLabel = get_node("HUD/MissedObjectsLabel")
 onready var StartButton = get_node("HUD/StartButton")
-onready var QuitButton = get_node("HUD/QuitButton")
 onready var DirectionsLabel = get_node("HUD/DirectionsLabel")
 onready var CountdownLabel = get_node("HUD/CountdownLabel")
 onready var EnableFilt = get_node("HUD/EnableFilt")
@@ -42,7 +41,6 @@ func _ready():
 	## hide things once user presses start
 	print("Level is " + str(PlayerData.level))
 	StartButton.connect("pressed", self, "_on_start_button_pressed")
-	QuitButton.connect("pressed", self, "_on_quit_button_pressed")
 	TargetObjectsScoreLabel.hide()
 	MissedObjectsLabel.hide()
 	DistractorObjectsScoreLabel.hide()
@@ -51,6 +49,12 @@ func _ready():
 
 
 func _process(delta):
+	
+	if Input.is_action_pressed("ui_cancel"):
+		PlayerData._save()
+		get_tree().quit()
+		$disableFiltSound.play()
+	
 	if PlayerData.targetObjectsPoints >= 25:
 		_level_switch()
 		if PlayerData.level >= 7:
@@ -84,9 +88,16 @@ func _physics_process(delta):
 
 	# beginning directions
 	elif !start and !end:
-		var object_avoid = str(object_labels[distractor_object])
-		var object_avoid2 = object_avoid.replace("_", " ")
-		DirectionsLabel.set_text("Avoid the " + str(object_avoid2))
+		if PlayerData.level >= 3:
+			var object_avoid_1 = str(object_labels[distractor_objects[0]])
+			var object_avoid_2 = str(object_labels[distractor_objects[1]])
+			var object_avoid_1_str = object_avoid_1.replace("_", " ")
+			var object_avoid_2_str = object_avoid_2.replace("_", " ")
+			DirectionsLabel.set_text("Avoid the " + str(object_avoid_1_str) + " and the " + str(object_avoid_2_str))
+		else:
+			var object_avoid = str(object_labels[distractor_objects[0]])
+			var object_avoid2 = object_avoid.replace("_", " ")
+			DirectionsLabel.set_text("Avoid the " + str(object_avoid2))
 
 	# end text
 	else:
@@ -113,16 +124,22 @@ func _on_TargetObjectsTimer_timeout():
 		add_child(t)
 		if PlayerData.level == 1:
 			t.size = .35
+			t.force = 0
 		if PlayerData.level == 2:
 			t.size = .26
+			t.force = 5
 		if PlayerData.level == 3:
 			t.size = .19
+			t.force = 10
 		if PlayerData.level == 4:
 			t.size = .13
+			t.force = 15
 		if PlayerData.level == 5:
 			t.size = .09
+			t.force = 20
 		if PlayerData.level == 6:
 			t.size = .05
+			t.force = 25
 	else:
 		$TargetObjectsTimer.stop()
 
@@ -136,16 +153,28 @@ func _on_DistractorObjectsTimer_timeout():
 		add_child(d)
 		if PlayerData.level == 1:
 			d.size = .35
+			d.force = 0
+			print("force = " + str(d.force))
 		if PlayerData.level == 2:
 			d.size = .26
+			d.force = 5
+			print("force = " + str(d.force))
 		if PlayerData.level == 3:
 			d.size = .19
+			d.force = 10
+			print("force = " + str(d.force))
 		if PlayerData.level == 4:
 			d.size = .13
+			d.force = 15
+			print("force = " + str(d.force))
 		if PlayerData.level == 5:
 			d.size = .09
+			d.force = 20
+			print("force = " + str(d.force))
 		if PlayerData.level == 6:
 			d.size = .05
+			d.force = 25
+			print("force = " + str(d.force))
 	else:
 		$DistractorObjectsTimer.stop()
 
@@ -157,10 +186,6 @@ func _level_switch():
 func _restart_level():
 	PlayerData._save()
 	get_tree().change_scene("res://Scenes/Restart.tscn")
-
-func _on_quit_button_pressed():
-	PlayerData._save()
-	get_tree().quit()
 	
 func _on_target_object_sliced():
 	if target_object_timer_length > 0:

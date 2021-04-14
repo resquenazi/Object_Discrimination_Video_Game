@@ -7,19 +7,25 @@ var w = 300
 var mousePos = Vector2()
 var jump = randi()%150+250
 var dir = randi()%200-50
-var tex_ref_array = Global.tex_ref_array
-var target_objects = Global.target_objects
-var distractor_object = Global.distractor_object
+onready var tex_ref_array = Global.tex_ref_array
+onready var target_objects = Global.target_objects
+onready var distractor_objects = Global.distractor_objects
+onready var level = PlayerData.level
 signal distractorObjectsPoints
 signal missedObjectsPoints
 var size = 1
 var start = true
+var force = 30
 
 # make objects bounce
 func _ready():
+	if level >= 3:
+		$Sprite2.texture = tex_ref_array[distractor_objects[randi()%distractor_objects.size()]]
+	else:
+		$Sprite2.texture = tex_ref_array[distractor_objects[0]]
 	$Sprite2.rotation_degrees = rand_range(-180, 180)
-	$Sprite2.texture = tex_ref_array[distractor_object]
-	apply_impulse(Vector2(0,0) , Vector2(dir, -jump))
+	apply_impulse(Vector2(-30,0) , Vector2(dir, -jump))
+	add_central_force(Vector2(0, -force))
 	$ScreenTimer.start()
 
 # make objects disappear when clicked
@@ -46,6 +52,9 @@ func _physics_process(delta):
 		queue_free() #clear cache
 		$Area2D.scale = Vector2($Sprite2.scale.x, $Sprite2.scale.y)
 		$CollisionShape2D.scale = Vector2($Sprite2.scale.x, $Sprite2.scale.y)
+	if global_position.y < 0:
+		emit_signal("missedObjectsPoints")
+		queue_free() #clear cache
 
 
 func _on_Area2D_body_entered(body):
