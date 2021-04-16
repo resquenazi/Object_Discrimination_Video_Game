@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Restart.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Background/Background.jpg" type="Texture" id=3]
 [ext_resource path="res://Music/DisableFilt.wav" type="AudioStream" id=4]
+[ext_resource path="res://Music/GameOver.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -91,7 +92,7 @@ margin_top = 16.5001
 margin_right = 326.5
 margin_bottom = 107.5
 custom_fonts/font = SubResource( 3 )
-text = "You missed too many objects! Restart the game and try to advance to the next level!"
+text = "You missed too many objects! Restart the level!"
 align = 1
 autowrap = true
 __meta__ = {
@@ -149,3 +150,7 @@ __meta__ = {
 
 [node name="disableFilt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="gameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0

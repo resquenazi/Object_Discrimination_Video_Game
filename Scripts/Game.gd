@@ -18,6 +18,7 @@ var distractor_object_timer_start = true
 var target_object_timer_start = true
 export var level_change_speed = .03 #number of seconds to subtract from timer when player gets score
 
+
 ## set up variables for menu screen
 onready var distractor_objects = Global.distractor_objects #index of object to avoid during the game
 
@@ -40,6 +41,7 @@ onready var EnableFilt = get_node("HUD/EnableFilt")
 func _ready():
 	## hide things once user presses start
 	print("Level is " + str(PlayerData.level))
+	print("Number of deaths " + str(PlayerData.deaths))
 	StartButton.connect("pressed", self, "_on_start_button_pressed")
 	TargetObjectsScoreLabel.hide()
 	MissedObjectsLabel.hide()
@@ -55,12 +57,12 @@ func _process(delta):
 		get_tree().quit()
 		$disableFiltSound.play()
 	
-	if PlayerData.targetObjectsPoints >= 25:
+	if PlayerData.targetObjectsPoints >= 50:
 		_level_switch()
 		if PlayerData.level >= 7:
 			end = true
 			PlayerData._save()
-			get_tree().change_scene("res://Scenes/Restart.tscn")
+			get_tree().change_scene("res://Scenes/Win.tscn")
 			
 
 func _physics_process(delta): 
@@ -75,16 +77,16 @@ func _physics_process(delta):
 
 	# determine when game ends
 	if start and !end:
-		if PlayerData.missedObjectsPoints >= 25:
+		if PlayerData.missedObjectsPoints >= 15:
 			end = true
 			_restart_level()
 		if PlayerData.targetObjectsPoints > cDif:
 			cDif += 10
 			$TargetObjectsTimer.set_wait_time($TargetObjectsTimer.get_wait_time() - 0.1)
-		if PlayerData.distractorObjectsPoints >= 25: 
+		if PlayerData.distractorObjectsPoints >= 10: 
 			_restart_level()
 			end = true
-			#_reset()
+			
 
 	# beginning directions
 	elif !start and !end:
@@ -184,6 +186,7 @@ func _level_switch():
 	get_tree().change_scene("res://Scenes/LevelSwitch.tscn")
 	
 func _restart_level():
+	PlayerData.deaths += 1
 	PlayerData._save()
 	get_tree().change_scene("res://Scenes/Restart.tscn")
 	

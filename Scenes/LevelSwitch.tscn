@@ -1,28 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/TrulyMadlyDpad-a72o.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/LevelSwitch.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Background/Background.jpg" type="Texture" id=3]
 [ext_resource path="res://Music/DisableFilt.wav" type="AudioStream" id=4]
+[ext_resource path="res://Music/levelUp.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 85
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 45
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 45
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 40
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
@@ -30,6 +15,22 @@ size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=7]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 45
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 30
 font_data = ExtResource( 1 )
 
@@ -73,7 +74,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Continue" type="Label" parent="."]
+[node name="TargetObjectsScoreLabel" type="Label" parent="ColorRect"]
+margin_left = 309.665
+margin_top = 162.483
+margin_right = 686.665
+margin_bottom = 206.483
+custom_fonts/font = SubResource( 6 )
+text = "Target Objects Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistractorObjectsScoreLabel" type="Label" parent="ColorRect"]
+margin_left = 309.665
+margin_top = 205.483
+margin_right = 686.665
+margin_bottom = 249.483
+custom_fonts/font = SubResource( 6 )
+text = "Distractor Objects Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MissedObjectsScoreLabel" type="Label" parent="ColorRect"]
+margin_left = 309.665
+margin_top = 252.483
+margin_right = 682.665
+margin_bottom = 296.483
+custom_fonts/font = SubResource( 7 )
+text = "Number of Missed Objects: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Label" parent="ColorRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -88,18 +122,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelNum" type="Label" parent="."]
-margin_left = 882.959
-margin_top = 390.941
-margin_right = 904.959
-margin_bottom = 438.941
-custom_fonts/font = SubResource( 3 )
-text = "2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="ColorRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -110,6 +133,17 @@ margin_right = 95.0
 margin_bottom = 198.0
 custom_fonts/font = SubResource( 4 )
 text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelNum" type="Label" parent="ColorRect"]
+margin_left = 758.959
+margin_top = 335.941
+margin_right = 780.959
+margin_bottom = 383.941
+custom_fonts/font = SubResource( 3 )
+text = "2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,38 +161,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TargetObjectsScoreLabel" type="Label" parent="."]
-margin_left = 506.665
-margin_top = 217.483
-margin_right = 883.665
-margin_bottom = 261.483
-custom_fonts/font = SubResource( 6 )
-text = "Target Objects Score: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DistractorObjectsScoreLabel" type="Label" parent="."]
-margin_left = 506.665
-margin_top = 260.483
-margin_right = 883.665
-margin_bottom = 304.483
-custom_fonts/font = SubResource( 6 )
-text = "Distractor Objects Score: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MissedObjectsScoreLabel" type="Label" parent="."]
-margin_left = 506.665
-margin_top = 307.483
-margin_right = 879.665
-margin_bottom = 351.483
-custom_fonts/font = SubResource( 7 )
-text = "Number of Missed Objects: "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="disableFilt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="levelUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -3.0

@@ -1,10 +1,10 @@
 extends Control
 
-onready var LevelNum = get_node("LevelNum")
-onready var TargetObjectsScoreLabel = get_node("TargetObjectsScoreLabel")
-onready var DistractorObjectsScoreLabel = get_node("DistractorObjectsScoreLabel")
-onready var MissedObjectsScoreLabel = get_node("MissedObjectsScoreLabel")
-onready var distractor_objects = Global.distractor_objects #index of object to avoid during the game
+onready var LevelNum = get_node("ColorRect/LevelNum")
+onready var TargetObjectsScoreLabel = get_node("ColorRect/TargetObjectsScoreLabel")
+onready var DistractorObjectsScoreLabel = get_node("ColorRect/DistractorObjectsScoreLabel")
+onready var MissedObjectsScoreLabel = get_node("ColorRect/MissedObjectsScoreLabel")
+onready var distractor_objects = Global.distractor_objects #index of object to avoid during game
 onready var TargetObjectsPoints = PlayerData.targetObjectsPoints
 onready var DistractorObjectsPoints = PlayerData.distractorObjectsPoints
 onready var MissedObjectsPoints = PlayerData.missedObjectsPoints
@@ -16,7 +16,7 @@ var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "ba
 "tea_kettle", "top_hat"] #for display of object to avoid
 
 func _ready():
-	$Start.connect("pressed", self, "Start")
+	$ColorRect/Start.connect("pressed", self, "Start")
 	$Quit.connect("pressed", self, "Quit")
 	
 	if PlayerData.level == 2:
@@ -30,11 +30,12 @@ func _ready():
 	if PlayerData.level == 6:
 		LevelNum.set_text("6")
 	
+	MusicController.stop_game_music()
 	$disableFilt.play()
+	$levelUp.play()
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
-	DistractorObjectsScoreLabel.set_text("Number of distractors hit" + str(DistractorObjectsPoints))
-	
+	DistractorObjectsScoreLabel.set_text("Number of distractors hit: " + str(DistractorObjectsPoints))
 	MissedObjectsScoreLabel.set_text("Number of missed objects: " + str(MissedObjectsPoints))
 
 func Start():

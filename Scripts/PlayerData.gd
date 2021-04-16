@@ -8,6 +8,7 @@ signal levelUpdated
 var targetObjectsPoints = 0 setget set_targetObjectsPoints #keep score of how many target objects were sliced
 var distractorObjectsPoints = 0 setget set_distractorObjectsPoints #keep score of how many distractor objects were sliced
 var missedObjectsPoints = 0 setget set_missedObjectsPoints #keep track of missed objects
+var deaths = 0 setget set_deaths
 var level = 1 setget set_level
 var dateTimeDict = OS.get_datetime()
 var year = dateTimeDict.year
@@ -36,10 +37,17 @@ func set_level(value: int) -> void:
 	level = value
 	emit_signal("levelUpdated")
 
+func set_deaths (value: int) -> void:
+	deaths = value
+	emit_signal("died")
+	
 func _reset_points():
 	targetObjectsPoints = 0
 	distractorObjectsPoints = 0
 	missedObjectsPoints = 0
+
+func _reset_deaths():
+	deaths = 0
 
 
 func _save():
@@ -60,12 +68,15 @@ func _save():
 	data += "\n"
 	data += "Level: " + str(level)
 	data += "\n"
+	data += "Deaths : " + str(deaths)
+	data += "\n"
 	data += "Target_Objects_Points: " + str(targetObjectsPoints)
 	data += "\n"
 	data += "Distractor_Objects_Points: " + str(distractorObjectsPoints)
 	data += "\n"
 	data += "Missed_Objects: " + str(missedObjectsPoints)
 	data += "\n"
+	
 	var new_file = File.new()
 
 	var error_code

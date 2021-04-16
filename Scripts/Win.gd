@@ -1,9 +1,9 @@
 extends Control
 
 
-onready var TargetObjectsScoreLabel = get_node("TargetObjectsScoreLabel")
-onready var DistractorObjectsScoreLabel = get_node("DistractorObjectsScoreLabel")
-onready var MissedObjectsScoreLabel = get_node("MissedObjectsScoreLabel")
+onready var TargetObjectsScoreLabel = get_node("ColorRect/TargetObjectsScoreLabel")
+onready var DistractorObjectsScoreLabel = get_node("ColorRect/DistractorObjectsScoreLabel")
+onready var MissedObjectsScoreLabel = get_node("ColorRect/MissedObjectsScoreLabel")
 onready var distractor_objects = Global.distractor_objects #index of object to avoid during the game
 onready var TargetObjectsPoints = PlayerData.targetObjectsPoints
 onready var DistractorObjectsPoints = PlayerData.distractorObjectsPoints
@@ -16,26 +16,11 @@ var object_labels = ["sneaker", "american_flag", "backpack", "baseball_bat", "ba
 "tea_kettle", "top_hat"] #for display of object to avoid
 
 func _ready():
-	$ColorRect/RestartButton.connect("pressed", self, "RestartGame")
+	$RestartButton.connect("pressed", self, "RestartGame")
 	$Quit.connect("pressed", self, "Quit")
 	$disableFilt.play()
 	MusicController.stop_game_music()
-	$gameOver.play()
-	
-	if PlayerData.deaths < 3:
-		$ColorRect/GameOver.set_text("You Died!")
-		if PlayerData.distractorObjectsPoints >= 15:
-			$ColorRect/RestartDirections.set_text("You slashed too many objects! Restart the level!")
-		else:
-			$ColorRect/RestartDirections.set_text("You missed too many objects! Restart the level")
-	else: 
-		$ColorRect/GameOver.set_text("Game Over!")
-		if PlayerData.distractorObjectsPoints >= 15:
-			$ColorRect/RestartDirections.set_text("You slashed too many objects and are out of lives! Restart the game!")
-		else:
-			$ColorRect/RestartDirections.set_text("You missed too many objects and are out of lives! Restart the game!")
-	
-
+	$winMusic.play()
 	
 	
 	TargetObjectsScoreLabel.set_text("Target Objects Score: " + str(TargetObjectsPoints))
@@ -47,10 +32,7 @@ func RestartGame():
 	Global._reset_objects()
 	Global._ready()
 	get_tree().change_scene("res://Scenes/Game.tscn")
-	
-	if PlayerData.deaths == 3:
-		PlayerData.level = 1
-		PlayerData._reset_deaths()
+	PlayerData.level = 1
 
 func Quit():
 	get_tree().quit()
