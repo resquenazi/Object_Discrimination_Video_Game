@@ -52,7 +52,7 @@ func _physics_process(delta):
 		queue_free() #clear cache
 		$Area2D.scale = Vector2($Sprite2.scale.x, $Sprite2.scale.y)
 		$CollisionShape2D.scale = Vector2($Sprite2.scale.x, $Sprite2.scale.y)
-	if global_position.y < 0:
+	if global_position.y < -20:
 		emit_signal("missedObjectsPoints")
 		queue_free() #clear cache
 

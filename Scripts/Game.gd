@@ -57,7 +57,7 @@ func _process(delta):
 		get_tree().quit()
 		$disableFiltSound.play()
 	
-	if PlayerData.targetObjectsPoints >= 50:
+	if PlayerData.targetObjectsPoints >= 45:
 		_level_switch()
 		if PlayerData.level >= 7:
 			end = true
