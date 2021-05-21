@@ -59,10 +59,11 @@ func _process(delta):
 	
 	if PlayerData.targetObjectsPoints >= 45:
 		_level_switch()
-		if PlayerData.level >= 7:
-			end = true
-			PlayerData._save()
-			get_tree().change_scene("res://Scenes/Win.tscn")
+		
+	if PlayerData.level == 7:
+		end = true
+		PlayerData._save()
+		get_tree().change_scene("res://Scenes/Win.tscn")
 			
 
 func _physics_process(delta): 

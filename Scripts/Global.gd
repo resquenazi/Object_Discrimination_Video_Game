@@ -65,7 +65,7 @@ func _ready():
 	print("Distractor objects are " + str(distractor_objects))
 
 func _reset_objects():
-	list = range(0,10)
+	list = range(0,38)
 	sample =[]
 	distractor_objects = []
 	target_objects = []

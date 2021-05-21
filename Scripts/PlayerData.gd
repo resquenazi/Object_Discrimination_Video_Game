@@ -4,12 +4,13 @@ signal targetObjectsPointsUpdated
 signal distractorObjectsPointsUpdated
 signal missedObjectsPointsUpdated
 signal levelUpdated
+signal died
 
 var targetObjectsPoints = 0 setget set_targetObjectsPoints #keep score of how many target objects were sliced
 var distractorObjectsPoints = 0 setget set_distractorObjectsPoints #keep score of how many distractor objects were sliced
 var missedObjectsPoints = 0 setget set_missedObjectsPoints #keep track of missed objects
 var deaths = 0 setget set_deaths
-var level = 1 setget set_level
+var level = 7 setget set_level
 var dateTimeDict = OS.get_datetime()
 var year = dateTimeDict.year
 var month = dateTimeDict.month
@@ -20,6 +21,7 @@ var time_return = String(hour) + ":" + String(minute)
 
 const OPEN_ERROR = 'ERROR: Failed to open "%s". Error code %s.'
 const DIR_ERROR = 'ERROR: Failed to create directory "%s". Error code %s.'
+
 
 func set_targetObjectsPoints(value: int) -> void:
 	targetObjectsPoints = value
@@ -68,7 +70,7 @@ func _save():
 	data += "\n"
 	data += "Level: " + str(level)
 	data += "\n"
-	data += "Deaths : " + str(deaths)
+	data += "Deaths: " + str(deaths)
 	data += "\n"
 	data += "Target_Objects_Points: " + str(targetObjectsPoints)
 	data += "\n"

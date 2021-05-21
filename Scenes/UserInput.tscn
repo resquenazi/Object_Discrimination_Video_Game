@@ -58,6 +58,7 @@ margin_top = 219.5
 margin_right = 117.0
 margin_bottom = 261.5
 custom_fonts/font = SubResource( 1 )
+max_length = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

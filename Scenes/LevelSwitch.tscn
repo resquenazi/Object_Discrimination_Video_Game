@@ -10,27 +10,27 @@
 size = 85
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 30
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=2]
-size = 45
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 40
+size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 45
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 45
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
 size = 30
 font_data = ExtResource( 1 )
 
@@ -79,7 +79,7 @@ margin_left = 309.665
 margin_top = 162.483
 margin_right = 686.665
 margin_bottom = 206.483
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "Target Objects Score: "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,7 +90,7 @@ margin_left = 309.665
 margin_top = 205.483
 margin_right = 686.665
 margin_bottom = 249.483
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "Distractor Objects Score: "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,7 +101,7 @@ margin_left = 309.665
 margin_top = 252.483
 margin_right = 682.665
 margin_bottom = 296.483
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "Number of Missed Objects: "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -116,7 +116,7 @@ margin_left = -472.0
 margin_top = 61.0
 margin_right = 490.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "You beat this level! To continue to level     press start"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,7 +131,7 @@ margin_left = -94.0
 margin_top = 137.0
 margin_right = 95.0
 margin_bottom = 198.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -142,7 +142,7 @@ margin_left = 758.959
 margin_top = 335.941
 margin_right = 780.959
 margin_bottom = 383.941
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 text = "2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,7 +155,7 @@ margin_left = -167.683
 margin_top = 31.6787
 margin_right = -42.6833
 margin_bottom = 82.6787
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
